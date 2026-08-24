@@ -1,0 +1,341 @@
+{
+  "merchantInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "logo": "",
+    "contentList": [
+      {
+        "content": ["PACKAGING & TRADING"],
+        "fontSize": 20,
+        "bold": 700
+      },
+      {
+        "content": ["4995 Buford Hwy, Norcross, GA 30071"],
+        "fontSize": 13,
+        "bold": 400
+      },
+      {
+        "content": ["478-273-3578"],
+        "fontSize": 14,
+        "bold": 700
+      }
+    ]
+  },
+  "orderInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "isPosPay": false,
+    "orderType": 1,
+    "payType": 1,
+    "orderChannel": 55,
+    "orderNumber": {
+      "content": ["#1"],
+      "fontSize": 28,
+      "bold": 700
+    },
+    "diningOption": {
+      "content": ["Dine In"],
+      "fontSize": 14,
+      "bold": 600
+    },
+    "table": {
+      "content": ["A003"],
+      "fontSize": 14,
+      "bold": 400
+    },
+    "orderTime": {
+      "content": ["12/8/2026 7:58:11 AM"],
+      "fontSize": 13,
+      "bold": 400
+    },
+    "server": {
+      "content": ["TomTom"],
+      "fontSize": 13,
+      "bold": 400
+    },
+    "confirmationNumber": {
+      "content": ["P00001"],
+      "fontSize": 14,
+      "bold": 400
+    },
+    "orderingChannel": {
+      "content": ["Station"],
+      "fontSize": 14,
+      "bold": 400
+    }
+  },
+  "customerInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "content": ["Customer Pickup Time"],
+        "fontSize": 13,
+        "bold": 400
+      },
+      {
+        "content": ["12/8/24 7:58 PM"],
+        "fontSize": 15,
+        "bold": 700
+      },
+      {
+        "content": ["Chance Smith"],
+        "fontSize": 14,
+        "bold": 400
+      },
+      {
+        "content": ["987-654-3210"],
+        "fontSize": 14,
+        "bold": 400
+      },
+      {
+        "content": ["987 Blessing Dr, Atlanta, GA 98760"],
+        "fontSize": 14,
+        "bold": 400
+      }
+    ]
+  },
+  "mealInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "content": ["2", "Hot Chocolate Mocha(Large)", "$15.50"],
+        "fontSize": 14,
+        "bold": 700,
+        "child": [
+          {
+            "content": ["", "Note: no spice", ""],
+            "fontSize": 12,
+            "bold": 400
+          },
+          {
+            "content": ["", "+1* soy milk", "$0.50"],
+            "fontSize": 12,
+            "bold": 400
+          },
+          {
+            "content": ["", "+2* coffee jelly", "$1.00"],
+            "fontSize": 12,
+            "bold": 400
+          }
+        ],
+        "remarkChild": []
+      },
+      {
+        "content": ["2", "Hot Chocolate Mocha(Large)", "$16.50"],
+        "fontSize": 14,
+        "bold": 700,
+        "child": [
+          {
+            "content": ["", "+1* soy milk", "$0.50"],
+            "fontSize": 12,
+            "bold": 400
+          },
+          {
+            "content": ["", "+2* coffee jelly", "$1.00"],
+            "fontSize": 12,
+            "bold": 400
+          }
+        ],
+        "remarkChild": []
+      }
+    ]
+  },
+  "orderNoteInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": []
+  },
+  "orderAmountInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "content": ["Subtotal", "$12.00"],
+        "fontSize": 14,
+        "bold": 400
+      },
+      {
+        "content": ["Taxes & Fees", "$27.04"],
+        "fontSize": 14,
+        "bold": 400,
+        "showDetailIcon": true
+      },
+      {
+        "content": ["Gratuity", "$1.20"],
+        "fontSize": 14,
+        "bold": 400
+      },
+      {
+        "content": ["Tip", "$1.20"],
+        "fontSize": 14,
+        "bold": 400
+      },
+      {
+        "content": ["Processing Fee", "$3.10"],
+        "fontSize": 14,
+        "bold": 400
+      },
+      {
+        "content": ["Total", "$44.54"],
+        "fontSize": 22,
+        "bold": 700,
+        "isTotal": true
+      }
+    ]
+  },
+  "taxFeeDetailInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "title": "Taxes & Fees",
+    "contentList": [
+      {
+        "content": ["Kiosk Fee (10%)", "$3.16"],
+        "fontSize": 14,
+        "bold": 400,
+        "category": "service"
+      },
+      {
+        "content": ["Tax1 (12%)", "$8.22"],
+        "fontSize": 14,
+        "bold": 400,
+        "category": "tax"
+      },
+      {
+        "content": ["Tax2 (18%)", "$12.50"],
+        "fontSize": 14,
+        "bold": 400,
+        "category": "tax"
+      },
+      {
+        "content": ["OPF (10%)", "$3.16"],
+        "fontSize": 14,
+        "bold": 400,
+        "category": "platform"
+      }
+    ]
+  },
+  "_taxFeeNote": {
+    "说明": "对齐 Taxes & Fees 展示优化：汇总行英文 Tax / Taxes & Fees / Fees；弹层顺序 service > tax > platform；合计必须等于汇总行。Processing Fee=信用卡手续费，不进弹层，主票单独一行。"
+  },
+  "tradeInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "content": ["Card(****9999)", "$42.00"],
+        "fontSize": 14,
+        "bold": 600
+      },
+      {
+        "content": ["Cash", "$2.54"],
+        "fontSize": 14,
+        "bold": 600
+      }
+    ]
+  },
+  "transInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "content": ["Trans Time", "12/8/2026 7:58:11 AM"],
+        "fontSize": 14,
+        "bold": 400
+      },
+      {
+        "content": ["Aid", "A10100100101003"],
+        "fontSize": 14,
+        "bold": 400
+      },
+      {
+        "content": ["Method", "Card"],
+        "fontSize": 14,
+        "bold": 400
+      }
+    ]
+  },
+  "cardDetail": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "content": ["Card Details"],
+        "fontSize": 14,
+        "bold": 400
+      },
+      {
+        "content": ["Card #: **** 9999"],
+        "fontSize": 14,
+        "bold": 400
+      }
+    ]
+  },
+  "amountInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "content": ["Tip Amount(10%)", "$1.20"],
+        "fontSize": 14,
+        "bold": 400
+      },
+      {
+        "content": ["Amount", "$44.54"],
+        "fontSize": 14,
+        "bold": 400
+      }
+    ]
+  },
+  "ticketConfig": {
+    "merchant": {
+      "showPart": true,
+      "logo": true,
+      "name": true,
+      "address": true,
+      "mobile": true
+    },
+    "order": {
+      "showPart": true
+    },
+    "meal": {
+      "showPart": true,
+      "quantity": true,
+      "mealName": true,
+      "mealPrice": true
+    },
+    "expense": {
+      "showPart": true
+    },
+    "pay": {
+      "showPart": true
+    }
+  },
+  "_demoScenes": {
+    "ooPickupBadge": {
+      "说明": "把 orderInfo.orderChannel 改为 1，清空 table.content，胶囊应显示 Pickup / P00001",
+      "orderChannel": 1,
+      "diningOption": "Pickup",
+      "table": "",
+      "confirmationNumber": "P00001"
+    },
+    "dineInBadge": {
+      "说明": "当前 Demo：有桌台也只显示 Dine In，不拼接 / A003",
+      "orderChannel": 55,
+      "diningOption": "Dine In",
+      "table": "A003"
+    }
+  }
+}

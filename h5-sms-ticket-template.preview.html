@@ -1,0 +1,441 @@
+<!--
+  preview of: h5-sms-ticket-template.ftl
+  data: demo-merged-ticket.json
+  generated-by: ftl-ticket-html-preview skill
+  note: 静态展开，非服务端 FreeMarker 渲染；改 FTL 后请重新生成本文件
+  badge: 有桌台 → 只显示 Dine In（不拼 / A003）
+-->
+<!DOCTYPE html>
+<html lang="en" style="max-width: 430px;padding: 0;margin: 0 auto">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Order Receipt (Preview)</title>
+    <style>
+        .w-100-f { width: 100%; }
+        .w-70-f { width: 70%; }
+        .w-50-f { width: 50%; }
+        .w-40-f { width: 40%; }
+        .w-30-f { width: 30%; }
+        .w-20-f { width: 20%; }
+        .line-box { width: 100%; padding: 0; }
+        .line { border-top: 1px dashed #c8c8c8; }
+        .word-break { word-break: break-word; }
+        .order-badge {
+            display: inline-block;
+            width: auto;
+            max-width: 100%;
+            border: 1.5px solid #111111;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+        .info-icon {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1px solid #888888;
+            color: #666666;
+            font-size: 10px;
+            line-height: 14px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            margin-left: 4px;
+            vertical-align: middle;
+        }
+        .store-logo-fallback {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            margin: 0 auto;
+            background: #6f3cff;
+            text-align: center;
+            line-height: 56px;
+        }
+        .store-logo-fallback svg {
+            width: 28px;
+            height: 28px;
+            fill: #ffffff;
+            vertical-align: middle;
+        }
+        div { width: auto; max-width: 100%; }
+        .w-100-f, .line-box, .line { width: 100%; }
+        .modal-mask {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1000;
+        }
+        .modal-mask.is-open { display: block; }
+        .modal-panel {
+            width: 86%;
+            max-width: 340px;
+            margin: 20% auto 0;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 18px 16px 16px;
+        }
+        .modal-confirm {
+            display: block;
+            width: 100%;
+            margin-top: 18px;
+            border: none;
+            border-radius: 24px;
+            padding: 12px 16px;
+            background: #6f3cff;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .modal-close {
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: transparent;
+            font-size: 22px;
+            line-height: 1;
+            color: #333333;
+            cursor: pointer;
+        }
+        .preview-banner {
+            max-width: 430px;
+            margin: 0 auto;
+            padding: 8px 16px;
+            background: #fff8e6;
+            color: #8a6d00;
+            font-size: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+    </style>
+</head>
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;margin:0;color:#111111;background-color:#f5f5f5;">
+<div class="preview-banner">本地预览 · Taxes &amp; Fees 弹层顺序：服务费 &gt; 税 &gt; 平台费 · 合计=$27.04 · Processing Fee 为信用卡手续费单独行</div>
+<div style="max-width:430px;padding:16px;margin:0 auto;background:#ffffff;">
+<div class="w-100-f">
+    <table class="w-100-f" style="background-color:#ffffff;padding-top:0;overflow:hidden;" role="presentation" border="0" cellpadding="0" cellspacing="0">
+
+        <!-- 1. 门店 -->
+        <tr>
+            <td colspan="12" style="padding-top:8px;" align="center">
+                <div class="store-logo-fallback" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 8.5l-1.5-4.2A2 2 0 0017.6 3H6.4a2 2 0 00-1.9 1.3L3 8.5V10a2 2 0 002 2v7a1 1 0 001 1h12a1 1 0 001-1v-7a2 2 0 002-2V8.5zM6.4 5h11.2l1.1 3H5.3L6.4 5zM8 19v-5h8v5H8z"/>
+                    </svg>
+                </div>
+            </td>
+        </tr>
+        <tr style="line-height:33.33px;">
+            <td style="font-size:20px;font-weight:700;word-break:break-word;" colspan="12" align="center">
+                <div>PACKAGING &amp; TRADING</div>
+            </td>
+        </tr>
+        <tr style="line-height:21.67px;">
+            <td style="font-size:13px;font-weight:400;word-break:break-word;" colspan="12" align="center">
+                <div>4995 Buford Hwy, Norcross, GA 30071</div>
+            </td>
+        </tr>
+        <tr style="line-height:23.33px;">
+            <td style="font-size:14px;font-weight:700;word-break:break-word;" colspan="12" align="center">
+                <div>478-273-3578</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12" style="height:16px;"></td>
+        </tr>
+
+        <!-- 2. 单头：胶囊只要 Dine In -->
+        <tr>
+            <td colspan="12" style="padding:0;">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="w-50-f" style="font-size:28px;font-weight:700;word-break:break-word;" valign="top" align="left">
+                            <div>#1</div>
+                        </td>
+                        <td class="w-50-f" valign="middle" align="right" style="padding-left:8px;">
+                            <div class="order-badge" style="font-size:14px;">Dine In</div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12" style="padding:0;">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="w-50-f" style="font-size:13px;color:#333333;padding-top:8px;" valign="top" align="left">
+                            <div>12/8/2026 7:58:11 AM</div>
+                        </td>
+                        <td class="w-50-f" style="font-size:13px;color:#333333;padding-top:8px;" valign="top" align="right">
+                            <div>Server: TomTom</div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="w-100-f line-box" style="height:28px;" valign="center" colspan="12">
+                <div class="line"></div>
+            </td>
+        </tr>
+
+        <!-- 3. 顾客 -->
+        <tr style="line-height:21.67px;">
+            <td style="font-size:13px;font-weight:400;" colspan="12" align="center"><div>Customer Pickup Time</div></td>
+        </tr>
+        <tr style="line-height:25.00px;">
+            <td style="font-size:15px;font-weight:700;" colspan="12" align="center"><div>12/8/24 7:58 PM</div></td>
+        </tr>
+        <tr style="line-height:23.33px;">
+            <td style="font-size:14px;font-weight:400;" colspan="12" align="center"><div>Chance Smith</div></td>
+        </tr>
+        <tr style="line-height:23.33px;">
+            <td style="font-size:14px;font-weight:400;" colspan="12" align="center"><div>987-654-3210</div></td>
+        </tr>
+        <tr style="line-height:23.33px;">
+            <td style="font-size:14px;font-weight:400;" colspan="12" align="center"><div>987 Blessing Dr, Atlanta, GA 98760</div></td>
+        </tr>
+        <tr>
+            <td class="w-100-f line-box" style="height:28px;" valign="center" colspan="12">
+                <div class="line"></div>
+            </td>
+        </tr>
+
+        <!-- 4. 餐品 -->
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:23.33px;">
+                        <td style="width:18px;font-size:14px;font-weight:700;" align="left" valign="top"><div>2</div></td>
+                        <td style="font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">Hot Chocolate Mocha(Large)</div></td>
+                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div>$15.50</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:20.00px;">
+                        <td style="width:18px;"></td>
+                        <td style="font-size:12px;color:#555555;" align="left"><div>Note: no spice</div></td>
+                        <td style="width:80px;"></td>
+                    </tr>
+                    <tr style="line-height:20.00px;">
+                        <td style="width:18px;"></td>
+                        <td style="font-size:12px;color:#555555;" align="left"><div>+1* soy milk</div></td>
+                        <td style="width:80px;font-size:12px;color:#555555;" align="right"><div>$0.50</div></td>
+                    </tr>
+                    <tr style="line-height:20.00px;">
+                        <td style="width:18px;"></td>
+                        <td style="font-size:12px;color:#555555;" align="left"><div>+2* coffee jelly</div></td>
+                        <td style="width:80px;font-size:12px;color:#555555;" align="right"><div>$1.00</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12" style="height:10px;"></td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:23.33px;">
+                        <td style="width:18px;font-size:14px;font-weight:700;" align="left" valign="top"><div>2</div></td>
+                        <td style="font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">Hot Chocolate Mocha(Large)</div></td>
+                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div>$16.50</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:20.00px;">
+                        <td style="width:18px;"></td>
+                        <td style="font-size:12px;color:#555555;" align="left"><div>+1* soy milk</div></td>
+                        <td style="width:80px;font-size:12px;color:#555555;" align="right"><div>$0.50</div></td>
+                    </tr>
+                    <tr style="line-height:20.00px;">
+                        <td style="width:18px;"></td>
+                        <td style="font-size:12px;color:#555555;" align="left"><div>+2* coffee jelly</div></td>
+                        <td style="width:80px;font-size:12px;color:#555555;" align="right"><div>$1.00</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="w-100-f line-box" style="height:28px;" valign="center" colspan="12">
+                <div class="line"></div>
+            </td>
+        </tr>
+
+        <!-- 5. 金额：Taxes & Fees 汇总=弹层合计；Processing Fee 为信用卡手续费单独行 -->
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:23.33px;">
+                        <td style="width:70%;font-size:14px;" align="left"><div>Subtotal</div></td>
+                        <td style="width:30%;font-size:14px;" align="right"><div>$12.00</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:23.33px;">
+                        <td style="width:70%;font-size:14px;" align="left">
+                            <div>Taxes &amp; Fees<span class="info-icon" id="taxFeeInfoBtn" role="button">i</span></div>
+                        </td>
+                        <td style="width:30%;font-size:14px;" align="right"><div>$27.04</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:23.33px;">
+                        <td style="width:70%;font-size:14px;" align="left"><div>Gratuity</div></td>
+                        <td style="width:30%;font-size:14px;" align="right"><div>$1.20</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:23.33px;">
+                        <td style="width:70%;font-size:14px;" align="left"><div>Tip</div></td>
+                        <td style="width:30%;font-size:14px;" align="right"><div>$1.20</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:23.33px;">
+                        <td style="width:70%;font-size:14px;" align="left"><div>Processing Fee</div></td>
+                        <td style="width:30%;font-size:14px;" align="right"><div>$3.10</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:36.67px;">
+                        <td style="width:70%;font-size:22px;font-weight:700;" align="left"><div>Total</div></td>
+                        <td style="width:30%;font-size:22px;font-weight:700;" align="right"><div>$44.54</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <!-- 6. 支付 -->
+        <tr>
+            <td class="w-100-f line-box" style="height:28px;" valign="center" colspan="12">
+                <div class="line"></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12" style="font-size:15px;font-weight:700;padding-bottom:8px;" align="left">
+                <div>Payment</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:23.33px;">
+                        <td style="width:70%;font-size:14px;font-weight:600;" align="left"><div>Card(****9999)</div></td>
+                        <td style="width:30%;font-size:14px;font-weight:600;" align="right"><div>$42.00</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12">
+                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr style="line-height:23.33px;">
+                        <td style="width:70%;font-size:14px;font-weight:600;" align="left"><div>Cash</div></td>
+                        <td style="width:30%;font-size:14px;font-weight:600;" align="right"><div>$2.54</div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="12" style="height:24px;"></td>
+        </tr>
+    </table>
+</div>
+</div>
+
+<div class="modal-mask" id="taxFeeModal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true">
+        <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="font-size:18px;font-weight:700;" align="left"><div>Taxes &amp; Fees</div></td>
+                <td style="width:40px;" align="right">
+                    <button type="button" class="modal-close" id="taxFeeCloseBtn" aria-label="Close">×</button>
+                </td>
+            </tr>
+        </table>
+        <table class="w-100-f" style="margin-top:14px;" role="presentation" border="0" cellpadding="0" cellspacing="0">
+            <tr style="line-height:22px;">
+                <td style="font-size:14px;padding-bottom:10px;" align="left"><div>Kiosk Fee (10%)</div></td>
+                <td style="font-size:14px;padding-bottom:10px;" align="right"><div>$3.16</div></td>
+            </tr>
+            <tr style="line-height:22px;">
+                <td style="font-size:14px;padding-bottom:10px;" align="left"><div>Tax1 (12%)</div></td>
+                <td style="font-size:14px;padding-bottom:10px;" align="right"><div>$8.22</div></td>
+            </tr>
+            <tr style="line-height:22px;">
+                <td style="font-size:14px;padding-bottom:10px;" align="left"><div>Tax2 (18%)</div></td>
+                <td style="font-size:14px;padding-bottom:10px;" align="right"><div>$12.50</div></td>
+            </tr>
+            <tr style="line-height:22px;">
+                <td style="font-size:14px;padding-bottom:10px;" align="left"><div>OPF (10%)</div></td>
+                <td style="font-size:14px;padding-bottom:10px;" align="right"><div>$3.16</div></td>
+            </tr>
+        </table>
+        <button type="button" class="modal-confirm" id="taxFeeConfirmBtn">Confirm</button>
+    </div>
+</div>
+<script>
+    (function () {
+        var modalNode = document.getElementById("taxFeeModal");
+        var openBtn = document.getElementById("taxFeeInfoBtn");
+        var closeBtn = document.getElementById("taxFeeCloseBtn");
+        var confirmBtn = document.getElementById("taxFeeConfirmBtn");
+        function openModal() {
+            modalNode.classList.add("is-open");
+            modalNode.setAttribute("aria-hidden", "false");
+        }
+        function closeModal() {
+            modalNode.classList.remove("is-open");
+            modalNode.setAttribute("aria-hidden", "true");
+        }
+        if (openBtn) openBtn.addEventListener("click", openModal);
+        if (closeBtn) closeBtn.addEventListener("click", closeModal);
+        if (confirmBtn) confirmBtn.addEventListener("click", closeModal);
+        if (modalNode) {
+            modalNode.addEventListener("click", function (event) {
+                if (event.target === modalNode) closeModal();
+            });
+        }
+    })();
+</script>
+</body>
+</html>
