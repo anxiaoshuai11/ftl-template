@@ -2,7 +2,7 @@
 
 > 主题：短信 H5 合并小票（订单小票 + 交易小票）  
 > 状态：已锁定 / settled  
-> 对应产物：`../h5-sms-ticket-template.ftl`、`../demo-merged-ticket.json`、`adr/`、`spec.md`  
+> 对应产物：`../order-trade-ticket-template.ftl`、`../demo-merged-ticket.json`、`adr/`、`spec.md`  
 > 说明：本文是 grill 过程原文级回放（题干 + 选项 + 推荐 + 用户答复），不是 ADR 摘要。
 
 ---

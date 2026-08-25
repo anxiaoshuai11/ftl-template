@@ -1,0 +1,91 @@
+{
+  "merchantInfo": {
+    "block": { "lineSpace": 4 },
+    "logo": "",
+    "contentList": [
+      { "backgroundColor": 0, "bold": 700, "content": ["fabler"], "contentType": 0, "fontSize": 18, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 400, "content": ["155 Hope St #2, Fall River, MA 02721"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 400, "content": ["7606668888"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 }
+    ]
+  },
+  "orderInfo": {
+    "block": { "lineSpace": 4 },
+    "isPosPay": true,
+    "orderType": 0,
+    "payType": 0,
+    "orderChannel": 0,
+    "orderNumber": { "backgroundColor": 0, "bold": 700, "content": ["#3"], "contentType": 0, "fontSize": 28, "lineSpace": 3, "selected": 0, "underLine": 0 },
+    "diningOption": { "backgroundColor": 0, "bold": 700, "content": ["Delivery"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+    "confirmationNumber": { "backgroundColor": 0, "bold": 0, "content": [""], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+    "orderTime": { "backgroundColor": 0, "bold": 0, "content": ["08/24/2026 04:51 PM"], "contentType": 0, "fontSize": 13, "lineSpace": 3, "selected": 0, "underLine": 0 },
+    "server": { "backgroundColor": 0, "bold": 0, "content": ["fabler"], "contentType": 0, "fontSize": 13, "lineSpace": 3, "selected": 0, "underLine": 0 }
+  },
+  "customerInfo": {
+    "block": { "lineSpace": 4 },
+    "tipType": 0,
+    "contentList": [
+      { "backgroundColor": 0, "bold": 0, "content": ["Pickup / Delivery: 2026-08-24T08:51:42.680734Z"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 }
+    ]
+  },
+  "mealInfo": {
+    "block": { "lineSpace": 4 },
+    "tipType": 0,
+    "contentList": [
+      { "backgroundColor": 0, "bold": 700, "content": ["1", "麦麦脆汁鸡（琵琶腿）", "$8.00"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 700, "content": ["1", "炸鸡天团桶", "$66.60"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 700, "content": ["1", "香芋派", "$10.90"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 700, "content": ["1", "菠萝派", "$9.90"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 700, "content": ["1", "人气堡堡桶", "$58.90"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 700, "content": ["1", "苹果片", "$6.60"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 700, "content": ["1", "那么大鸡排", "$18.60"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 700, "content": ["1", "三拼小食盒", "$12.80"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 700, "content": ["1", "麦麦汉堡桶", "$78.90"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      {
+        "backgroundColor": 0, "bold": 700, "content": ["1", "美汁源阳光橙", "$4.80"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0,
+        "child": [
+          { "backgroundColor": 0, "bold": 0, "content": ["", "+ 柠檬香", ""], "contentType": 0, "fontSize": 12, "lineSpace": 3, "selected": 0, "underLine": 0 },
+          { "backgroundColor": 0, "bold": 0, "content": ["", "+ 半糖", ""], "contentType": 0, "fontSize": 12, "lineSpace": 3, "selected": 0, "underLine": 0 },
+          { "backgroundColor": 0, "bold": 0, "content": ["", "+ 碎冰", ""], "contentType": 0, "fontSize": 12, "lineSpace": 3, "selected": 0, "underLine": 0 }
+        ]
+      },
+      {
+        "backgroundColor": 0, "bold": 700, "content": ["1", "美汁源阳光橙", "$0.20"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0,
+        "child": [
+          { "backgroundColor": 0, "bold": 0, "content": ["", "+ 半糖", ""], "contentType": 0, "fontSize": 12, "lineSpace": 3, "selected": 0, "underLine": 0 },
+          { "backgroundColor": 0, "bold": 0, "content": ["", "+ 不加冰", ""], "contentType": 0, "fontSize": 12, "lineSpace": 3, "selected": 0, "underLine": 0 },
+          { "backgroundColor": 0, "bold": 0, "content": ["", "+ 香草", ""], "contentType": 0, "fontSize": 12, "lineSpace": 3, "selected": 0, "underLine": 0 }
+        ]
+      }
+    ]
+  },
+  "orderAmountInfo": {
+    "block": { "lineSpace": 4 },
+    "tipType": 0,
+    "contentList": [
+      { "backgroundColor": 0, "bold": 0, "content": ["Subtotal", "$276.20"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 0, "content": ["Tax & Fees", "$94.14"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 0, "content": ["服务费B", "$60.76"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 0, "content": ["Tip", "$0.36"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 700, "content": ["Total", "$431.46"], "contentType": 0, "fontSize": 22, "lineSpace": 3, "selected": 0, "underLine": 0 }
+    ]
+  },
+  "taxFeeDetailInfo": {
+    "title": "Taxes & Fees",
+    "contentList": [
+      { "backgroundColor": 0, "bold": 0, "content": ["服务费B", "$60.76"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "backgroundColor": 0, "bold": 0, "content": ["Tax", "$94.14"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 }
+    ]
+  },
+  "tradeInfo": {
+    "block": { "lineSpace": 4 },
+    "tipType": 0,
+    "contentList": [
+      { "backgroundColor": 0, "bold": 600, "content": ["Card ****1012", "$0.20"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 }
+    ]
+  },
+  "ticketConfig": {
+    "merchant": { "showPart": true, "logo": true },
+    "meal": { "showPart": true },
+    "expense": { "showPart": true }
+  }
+}

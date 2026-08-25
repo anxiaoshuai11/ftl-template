@@ -9,7 +9,7 @@ Status: ready-for-agent
 
 关联产物（同级目录）：
 
-- `../h5-sms-ticket-template.ftl`
+- `../order-trade-ticket-template.ftl`
 - `../demo-merged-ticket.json`
 - `../KR1-可复用案例.md` / `../KR2-实践文档.md` / `../KR3-效率基线报告.md`
 

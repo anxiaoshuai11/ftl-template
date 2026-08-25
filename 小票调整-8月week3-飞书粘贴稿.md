@@ -34,11 +34,30 @@
 - 弹层合计 = 汇总行金额
 - **Processing Fee（信用卡手续费）**：主票单独一行，**不进**弹层
 
-# 三、新增 / 约定 JSON 字段
+# 三、字段取值口径（重要）
+
+模版对所有文案字段统一按「先取 `content[0]`，取不到再当字符串」的顺序解析，因此三种形态都能正确渲染：
+
+```json
+"orderNumber": "#3"
+"orderNumber": { "content": ["#3"] }
+"orderNumber": Content 对象（未经 JSON 序列化，直接灌进模版）
+```
+
+适用字段：`orderNumber` / `diningOption` / `table` / `confirmationNumber` / `orderTime` / `server` / `taxFeeDetailInfo.title`
+
+下发时请遵守两条：
+
+1. **文案一律放在 `content` 数组里。** `content` 为空数组时模版渲染成空串，不会把对象内容暴露到页面上。
+2. **时间字段必须下发已格式化好的门店本地时间。** 模版拿不到门店时区，不做任何时间转换，收到什么显示什么。
+   目前 `customerInfo` 里的取餐/配送时间仍是 `Pickup / Delivery: 2026-08-24T08:51:42.680734Z` 这种 ISO UTC 原文，
+   而同一张单的 `orderTime` 是 `08/24/2026 04:51 PM`，两者差 8 小时，**需按 `orderTime` 的方式统一处理**。
+
+# 四、新增 / 约定 JSON 字段
 
 ## 1. 金额汇总行（仍在 orderAmountInfo）
 
-税相关汇总行增加标记 `showDetailIcon`（有弹层明细时为 true）：
+税相关汇总行下发 `showDetailIcon`（有弹层明细时为 true）：
 
 ```json
 {
@@ -49,7 +68,7 @@
 }
 ```
 
-Total 行可选：
+Total 行下发 `isTotal`：
 
 ```json
 {
@@ -60,7 +79,12 @@ Total 行可选：
 }
 ```
 
-## 2. 新增弹层块 taxFeeDetailInfo
+**这两个标记请务必下发。** 缺失时模版会退化成按行文案猜，两个方向都会猜错：
+
+- 汇总行文案为 `Fees`（仅服务费/平台费）时不含 tax 字样，i 图标会漏显，弹层点不开
+- `Subtotal` 文案里含 total 字样，会被当成总计行，字号放大到 22px 加粗
+
+## 2. 弹层块 taxFeeDetailInfo
 
 ```json
 {
@@ -116,13 +140,13 @@ Total 行可选：
 
 无数据则 Payment 整块不渲染。
 
-# 四、兼容
+# 五、兼容
 
 - 历史数据无 `taxFeeDetailInfo`：不显示 i
-- `orderNumber` 兼容字符串与 `{ "content": [] }`
 - 打印侧 `ticketConfig` 本期不动
+- 顾客区 `customerInfo` 为空：整块不渲染
 
-# 五、单头胶囊（约定）
+# 六、单头胶囊（约定）
 
 - 有桌台：只显示 `diningOption`（如 Dine In），不拼桌台号
 - OO（`orderChannel=1`）且无桌台有取餐码：`diningOption / confirmationNumber`

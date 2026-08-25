@@ -32,7 +32,7 @@ description: >-
 
 推荐命名（与本仓库一致）：
 
-- `h5-sms-ticket-template.ftl` → `h5-sms-ticket-template.preview.html`
+- `order-trade-ticket-template.ftl` → `order-trade-ticket-template.preview.html`
 - Demo：`demo-merged-ticket.json`
 
 ## 转换规则（按优先级）

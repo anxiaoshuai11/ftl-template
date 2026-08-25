@@ -4,7 +4,7 @@ Status: ready-for-agent
 
 切片：`h5-ftl-template`。端：前端模版（交后端渲染）。总 spec：[`../spec.md`](../spec.md)。依赖：无代码依赖；数据契约见 [02](./02-demo-json-contract.md)。
 
-产物：`../../h5-sms-ticket-template.ftl`
+产物：`../../order-trade-ticket-template.ftl`
 
 ## Problem Statement
 
@@ -12,7 +12,7 @@ Status: ready-for-agent
 
 ## Solution
 
-新建 `h5-sms-ticket-template.ftl`：外层与嵌套 `table/tr/td`，`max-width:430px`。渲染顺序：门店 → 单头 → 顾客 → 餐品/整单备注 → 金额 → 支付。辅助函数：`setLineSpacing`、`readText`、`buildOrderBadge`、`buildServerLabel`、`orderQuantityColumnWidth`。弹层原生 JS。
+新建 `order-trade-ticket-template.ftl`：外层与嵌套 `table/tr/td`，`max-width:430px`。渲染顺序：门店 → 单头 → 顾客 → 餐品/整单备注 → 金额 → 支付。辅助函数：`setLineSpacing`、`readText`、`buildOrderBadge`、`buildServerLabel`、`orderQuantityColumnWidth`。弹层原生 JS。
 
 ## User Stories
 

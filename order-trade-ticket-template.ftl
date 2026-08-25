@@ -61,6 +61,26 @@
             margin-left: 4px;
             vertical-align: middle;
         }
+        /* 页头：浅紫底，通栏铺满 */
+        .page-header {
+            width: 100%;
+            background-color: #f5f3ff;
+            padding: 20px 16px;
+            box-sizing: border-box;
+        }
+        /* 白卡外层：左右各留一条浅紫边距，露出页面底色 */
+        .card-wrap {
+            width: 100%;
+            padding: 0 6px 6px;
+            box-sizing: border-box;
+        }
+        /* 白卡主体：单头往下的全部内容 */
+        .ticket-card {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 16px;
+            box-sizing: border-box;
+        }
         .store-logo {
             width: 56px;
             height: 56px;
@@ -90,7 +110,8 @@
         }
         .w-100-f,
         .line-box,
-        .line {
+        .line,
+        .card-wrap {
             width: 100%;
         }
         .modal-mask {
@@ -139,7 +160,7 @@
         }
     </style>
 </head>
-<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;max-width:430px;padding:16px;margin:0 auto;color:#111111;background-color:#ffffff;">
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;margin:0;padding:0;color:#111111;background-color:#ffffff;">
 
 <#-- 行高计算，与旧小票模版保持一致 -->
 <#function setLineSpacing fontSize lineSpace>
@@ -147,18 +168,47 @@
     <#return space>
 </#function>
 
-<#-- 读取字段文案：兼容字符串或 { content: [] } 结构 -->
+<#-- 取 content 数组里的单个元素：正常是字符串，做一层类型兜底 -->
+<#function readContentValue contentValue>
+    <#if !contentValue??>
+        <#return "">
+    </#if>
+    <#-- 仍是对象时不再下钻，宁可留空也不能把对象自身打到页面上 -->
+    <#if contentValue?is_hash>
+        <#return "">
+    </#if>
+    <#if contentValue?is_string>
+        <#return contentValue>
+    </#if>
+    <#if contentValue?is_number>
+        <#return contentValue?c>
+    </#if>
+    <#return "">
+</#function>
+
+<#-- 读取字段文案：兼容纯字符串、{ content: [] } 结构、后端 Content 对象
+     注意：后端 Content 对象经 FreeMarker 对象包装后 ?is_string 同样为真（取到的是 toString 结果），
+     所以必须先按 hash 取 content，最后才回退成字符串，否则页面会出现 Content(contentType=0,...) -->
 <#function readText field>
     <#if !field??>
         <#return "">
     </#if>
-    <#if field?is_string>
-        <#return field>
+    <#if field?is_hash>
+        <#if field.content??>
+            <#local contentField = field.content>
+            <#if contentField?is_string>
+                <#return contentField>
+            </#if>
+            <#if contentField?is_enumerable>
+                <#local contentList = contentField?sequence>
+                <#if contentList?size gt 0>
+                    <#return readContentValue(contentList[0])>
+                </#if>
+            </#if>
+        </#if>
+        <#return "">
     </#if>
-    <#if field?is_hash && field.content?? && field.content?size gt 0>
-        <#return field.content[0]!"">
-    </#if>
-    <#return "">
+    <#return readContentValue(field)>
 </#function>
 
 <#-- 组装右侧胶囊：有桌台只显示类型；OO 无桌台有取餐码则类型 / 取餐码 -->
@@ -221,11 +271,8 @@
 <#assign serverLabelText = "">
 <#if orderInfo??>
     <#assign orderBadgeText = buildOrderBadge(orderInfo)>
-    <#if orderInfo.orderNumber?? && orderInfo.orderNumber?is_string>
-        <#assign orderNumberText = orderInfo.orderNumber>
-    <#else>
-        <#assign orderNumberText = readText(orderInfo.orderNumber!'')>
-    </#if>
+    <#-- 统一走 readText：orderNumber 可能是字符串、{content:[]} 或后端 Content 对象 -->
+    <#assign orderNumberText = readText(orderInfo.orderNumber!'')>
     <#assign orderTimeText = readText(orderInfo.orderTime!'')>
     <#assign serverLabelText = buildServerLabel(orderInfo.server!'')>
 </#if>
@@ -233,8 +280,11 @@
 <#assign showTaxFeeModal = taxFeeDetailInfo?? && taxFeeDetailInfo.contentList?? && taxFeeDetailInfo.contentList?size gt 0>
 <#-- 弹层标题：优先用后端下发的 title（Tax / Taxes & Fees / Fees），否则默认 Taxes & Fees -->
 <#assign taxFeeModalTitleText = "Taxes & Fees">
-<#if taxFeeDetailInfo?? && taxFeeDetailInfo.title?? && taxFeeDetailInfo.title?has_content>
-    <#assign taxFeeModalTitleText = taxFeeDetailInfo.title>
+<#if taxFeeDetailInfo??>
+    <#assign taxFeeTitleFromServer = readText(taxFeeDetailInfo.title!'')>
+    <#if taxFeeTitleFromServer?has_content>
+        <#assign taxFeeModalTitleText = taxFeeTitleFromServer>
+    </#if>
 </#if>
 <#assign showPayment = tradeInfo?? && tradeInfo.contentList?? && tradeInfo.contentList?size gt 0>
 
@@ -251,20 +301,20 @@
     <#assign showExpense = false>
 </#if>
 
-<div class="w-100-f">
-    <table class="w-100-f" style="background-color:#ffffff;padding-top:0;overflow:hidden;" role="presentation" border="0" cellpadding="0" cellspacing="0">
+<div style="max-width:430px;margin:0 auto;background-color:#f5f3ff;" class="w-100-f">
 
-        <#-- 1. 页头：门店信息 -->
-        <#if showMerchant && merchantInfo?? && merchantInfo.contentList?? && merchantInfo.contentList?size gt 0>
+    <#-- 1. 页头：门店信息，独立浅紫底通栏 -->
+    <#if showMerchant && merchantInfo?? && merchantInfo.contentList?? && merchantInfo.contentList?size gt 0>
+        <table class="page-header" role="presentation" border="0" cellpadding="0" cellspacing="0">
             <#if merchantInfo.logo?? && merchantInfo.logo?has_content>
                 <tr>
-                    <td colspan="12" style="padding-top:8px;" align="center">
+                    <td colspan="12" style="padding-bottom:8px;" align="center">
                         <img class="store-logo" src="${merchantInfo.logo}" alt="store logo"/>
                     </td>
                 </tr>
             <#elseif ticketConfig?? && ticketConfig.merchant?? && ticketConfig.merchant.logo?? && ticketConfig.merchant.logo>
                 <tr>
-                    <td colspan="12" style="padding-top:8px;" align="center">
+                    <td colspan="12" style="padding-bottom:8px;" align="center">
                         <div class="store-logo-fallback" aria-hidden="true">
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M21 8.5l-1.5-4.2A2 2 0 0017.6 3H6.4a2 2 0 00-1.9 1.3L3 8.5V10a2 2 0 002 2v7a1 1 0 001 1h12a1 1 0 001-1v-7a2 2 0 002-2V8.5zM6.4 5h11.2l1.1 3H5.3L6.4 5zM8 19v-5h8v5H8z"/>
@@ -284,12 +334,14 @@
                     </tr>
                 </#if>
             </#list>
-            <tr>
-                <td colspan="12" style="height:16px;"></td>
-            </tr>
-        </#if>
+        </table>
+    </#if>
 
-        <#-- 2. 单头：单号 / 类型胶囊 -->
+    <#-- 2. 主体白卡：左右各留一条浅紫边距 -->
+    <div class="card-wrap">
+    <table class="ticket-card" style="overflow:hidden;" role="presentation" border="0" cellpadding="0" cellspacing="0">
+
+        <#-- 2.1 单头：单号 / 类型胶囊 -->
         <#if orderInfo??>
             <tr>
                 <td colspan="12" style="padding:0;">
@@ -330,7 +382,7 @@
             </tr>
         </#if>
 
-        <#-- 3. 顾客信息：有则显示 -->
+        <#-- 2.2 顾客信息：有则显示 -->
         <#if customerInfo?? && customerInfo.contentList?? && customerInfo.contentList?size gt 0>
             <#assign customerLineSpace = (customerInfo.block.lineSpace)!4>
             <#list customerInfo.contentList as customerItem>
@@ -350,7 +402,7 @@
             </tr>
         </#if>
 
-        <#-- 4. 餐品信息 -->
+        <#-- 2.3 餐品信息 -->
         <#if showMeal && mealInfo?? && mealInfo.contentList?? && mealInfo.contentList?size gt 0>
             <#assign mealLineSpace = (mealInfo.block.lineSpace)!4>
             <#assign qtyWidth = orderQuantityColumnWidth(mealInfo)>
@@ -531,7 +583,7 @@
             </td>
         </tr>
 
-        <#-- 5. 金额信息 -->
+        <#-- 2.4 金额信息 -->
         <#if showExpense && orderAmountInfo?? && orderAmountInfo.contentList?? && orderAmountInfo.contentList?size gt 0>
             <#assign amountLineSpace = (orderAmountInfo.block.lineSpace)!4>
             <#list orderAmountInfo.contentList as amountItem>
@@ -566,7 +618,7 @@
             </#list>
         </#if>
 
-        <#-- 6. 支付信息：无数据整块不渲染 -->
+        <#-- 2.5 支付信息：无数据整块不渲染 -->
         <#if showPayment>
             <tr>
                 <td class="w-100-f line-box" style="height:28px;" valign="center" colspan="12">
@@ -598,9 +650,10 @@
         </#if>
 
         <tr>
-            <td colspan="12" style="height:24px;"></td>
+            <td colspan="12" style="height:8px;"></td>
         </tr>
     </table>
+    </div>
 </div>
 
 <#-- Tax & Fee 明细弹层：仅有 taxFeeDetailInfo 时可用 -->

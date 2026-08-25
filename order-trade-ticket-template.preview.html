@@ -1,5 +1,5 @@
 <!--
-  preview of: h5-sms-ticket-template.ftl
+  preview of: order-trade-ticket-template.ftl
   data: demo-merged-ticket.json
   generated-by: ftl-ticket-html-preview skill
   note: 静态展开，非服务端 FreeMarker 渲染；改 FTL 后请重新生成本文件
@@ -63,8 +63,25 @@
             fill: #ffffff;
             vertical-align: middle;
         }
+        .page-header {
+            width: 100%;
+            background-color: #f5f3ff;
+            padding: 20px 16px;
+            box-sizing: border-box;
+        }
+        .card-wrap {
+            width: 100%;
+            padding: 0 6px 6px;
+            box-sizing: border-box;
+        }
+        .ticket-card {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 16px;
+            box-sizing: border-box;
+        }
         div { width: auto; max-width: 100%; }
-        .w-100-f, .line-box, .line { width: 100%; }
+        .w-100-f, .line-box, .line, .card-wrap { width: 100%; }
         .modal-mask {
             display: none;
             position: fixed;
@@ -118,15 +135,14 @@
         }
     </style>
 </head>
-<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;margin:0;color:#111111;background-color:#f5f5f5;">
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;margin:0;padding:0;color:#111111;background-color:#ffffff;">
 <div class="preview-banner">本地预览 · Taxes &amp; Fees 弹层顺序：服务费 &gt; 税 &gt; 平台费 · 合计=$27.04 · Processing Fee 为信用卡手续费单独行</div>
-<div style="max-width:430px;padding:16px;margin:0 auto;background:#ffffff;">
-<div class="w-100-f">
-    <table class="w-100-f" style="background-color:#ffffff;padding-top:0;overflow:hidden;" role="presentation" border="0" cellpadding="0" cellspacing="0">
+<div style="max-width:430px;margin:0 auto;background-color:#f5f3ff;" class="w-100-f">
 
-        <!-- 1. 门店 -->
+    <!-- 1. 门店：浅紫底通栏 -->
+    <table class="page-header" role="presentation" border="0" cellpadding="0" cellspacing="0">
         <tr>
-            <td colspan="12" style="padding-top:8px;" align="center">
+            <td colspan="12" style="padding-bottom:8px;" align="center">
                 <div class="store-logo-fallback" aria-hidden="true">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M21 8.5l-1.5-4.2A2 2 0 0017.6 3H6.4a2 2 0 00-1.9 1.3L3 8.5V10a2 2 0 002 2v7a1 1 0 001 1h12a1 1 0 001-1v-7a2 2 0 002-2V8.5zM6.4 5h11.2l1.1 3H5.3L6.4 5zM8 19v-5h8v5H8z"/>
@@ -149,11 +165,13 @@
                 <div>478-273-3578</div>
             </td>
         </tr>
-        <tr>
-            <td colspan="12" style="height:16px;"></td>
-        </tr>
+    </table>
 
-        <!-- 2. 单头：胶囊只要 Dine In -->
+    <!-- 2. 主体白卡：左右留浅紫边距 -->
+    <div class="card-wrap">
+    <table class="ticket-card" style="overflow:hidden;" role="presentation" border="0" cellpadding="0" cellspacing="0">
+
+        <!-- 2.1 单头：胶囊只要 Dine In -->
         <tr>
             <td colspan="12" style="padding:0;">
                 <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
@@ -376,10 +394,10 @@
             </td>
         </tr>
         <tr>
-            <td colspan="12" style="height:24px;"></td>
+            <td colspan="12" style="height:8px;"></td>
         </tr>
     </table>
-</div>
+    </div>
 </div>
 
 <div class="modal-mask" id="taxFeeModal" aria-hidden="true">

@@ -1,0 +1,37 @@
+{
+  "_note": "故意做坏的数据，用来验证 ftl-selftest 真能抓到问题，不是永远报通过。改模版后这份数据仍应报错。",
+  "_expected": [
+    "mealInfo 第 2 条 content 是空数组：contentSize=0 不等于 1 也不等于 2，会落到三列分支去取 content[0]，越界",
+    "mealInfo 第 3 条完全没有 content 字段：<#assign contentSize = mealItem.content?size> 会抛错",
+    "merchantInfo 第 2 条缺 content，但模版写了 !\"\" 兜底，不应被报出来"
+  ],
+  "merchantInfo": {
+    "block": { "lineSpace": 4 },
+    "contentList": [
+      { "content": ["Sunny Bistro"], "fontSize": 16, "bold": 700 },
+      { "fontSize": 13 }
+    ]
+  },
+  "orderInfo": {
+    "orderNumber": "A-1024",
+    "orderTime": "2026-08-24 12:30",
+    "diningOption": "Dine In",
+    "table": "A12",
+    "orderChannel": 0
+  },
+  "mealInfo": {
+    "block": { "lineSpace": 4 },
+    "contentList": [
+      { "content": ["1", "Latte", "$4.50"], "fontSize": 14 },
+      { "content": [], "fontSize": 14 },
+      { "fontSize": 14 }
+    ]
+  },
+  "orderAmountInfo": {
+    "block": { "lineSpace": 4 },
+    "contentList": [
+      { "content": ["Subtotal", "$9.00"], "fontSize": 14 },
+      { "content": ["Total", "$9.72"], "fontSize": 14, "isTotal": true }
+    ]
+  }
+}

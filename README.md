@@ -4,9 +4,9 @@
 
 ## 主交付
 
-- `h5-sms-ticket-template.ftl` — 短信短链 H5 模版
+- `order-trade-ticket-template.ftl` — 短信短链 H5 模版
 - `demo-merged-ticket.json` — Demo 拼盘数据
-- `h5-sms-ticket-template.preview.html` — 本地浏览器预览
+- `order-trade-ticket-template.preview.html` — 本地浏览器预览
 
 ## OKR 文档
 
@@ -17,4 +17,4 @@
 
 ## 本地预览
 
-用浏览器直接打开 `h5-sms-ticket-template.preview.html` 即可看样式（无需部署）。
+用浏览器直接打开 `order-trade-ticket-template.preview.html` 即可看样式（无需部署）。

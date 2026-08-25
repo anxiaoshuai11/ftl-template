@@ -1,0 +1,131 @@
+{
+  "_说明": "场景套件定义。基于 base 数据做增删改，派生出多组用例，一次跑完。",
+  "_字段": {
+    "name": "场景名，会出现在报告里",
+    "expect": "这个场景想验证什么，写给人看",
+    "remove": "要删掉的字段路径数组，支持 a.b.c 与 a.b[0]",
+    "set": "要设置的字段，键是路径，值是内容"
+  },
+  "base": "../demo-merged-ticket.json",
+  "scenarios": [
+    {
+      "name": "基线-完整数据",
+      "expect": "所有分区都应显示，不应有任何错误",
+      "remove": [],
+      "set": {}
+    },
+    {
+      "name": "仅税",
+      "expect": "汇总行文案为 Tax，弹层只列税项",
+      "remove": [],
+      "set": {
+        "taxFeeDetailInfo.title": "Tax",
+        "taxFeeDetailInfo.contentList": [
+          { "content": ["Sales Tax", "$1.02"], "fontSize": 14 }
+        ]
+      }
+    },
+    {
+      "name": "仅费",
+      "expect": "汇总行文案为 Fees，弹层只列费用项",
+      "remove": [],
+      "set": {
+        "taxFeeDetailInfo.title": "Fees",
+        "taxFeeDetailInfo.contentList": [
+          { "content": ["Service Fee", "$0.80"], "fontSize": 14 }
+        ]
+      }
+    },
+    {
+      "name": "无税无费",
+      "expect": "不渲染 i 图标，不渲染弹层与弹层 JS",
+      "remove": ["taxFeeDetailInfo"],
+      "set": {}
+    },
+    {
+      "name": "无顾客信息",
+      "expect": "顾客分区整块不渲染，分隔线不重复",
+      "remove": ["customerInfo"],
+      "set": {}
+    },
+    {
+      "name": "无支付信息",
+      "expect": "Payment 整块不渲染（含标题与分隔线）",
+      "remove": ["tradeInfo"],
+      "set": {}
+    },
+    {
+      "name": "无门店Logo",
+      "expect": "不出图片，按配置决定是否走占位图标",
+      "remove": ["merchantInfo.logo"],
+      "set": {}
+    },
+    {
+      "name": "OO取餐码胶囊",
+      "expect": "胶囊显示「类型 / 取餐码」，不显示桌台",
+      "remove": ["orderInfo.table"],
+      "set": {
+        "orderInfo.orderChannel": 1
+      }
+    },
+    {
+      "name": "堂食有桌台",
+      "expect": "胶囊只显示 Dine In，不拼接桌台号",
+      "remove": [],
+      "set": {
+        "orderInfo.orderChannel": 0
+      }
+    },
+    {
+      "name": "带整单备注",
+      "expect": "整单备注行正常渲染",
+      "remove": [],
+      "set": {
+        "orderNoteInfo": {
+          "block": { "lineSpace": 4 },
+          "contentList": [{ "content": ["Note: no napkins, please"], "fontSize": 13 }]
+        }
+      }
+    },
+    {
+      "name": "有门店Logo",
+      "expect": "logo 有值时渲染图片，不走占位图标",
+      "remove": [],
+      "set": {
+        "merchantInfo.logo": "https://cdn.example.com/store-logo.png"
+      }
+    },
+    {
+      "name": "配置关闭餐品分区",
+      "expect": "ticketConfig.meal.showPart 为 false 时餐品整块不渲染",
+      "remove": [],
+      "set": {
+        "ticketConfig": { "meal": { "showPart": false } }
+      }
+    },
+    {
+      "name": "配置关闭门店分区",
+      "expect": "ticketConfig.merchant.showPart 为 false 时页头整块不渲染",
+      "remove": [],
+      "set": {
+        "ticketConfig": { "merchant": { "showPart": false } }
+      }
+    },
+    {
+      "name": "配置关闭金额分区",
+      "expect": "ticketConfig.expense.showPart 为 false 时金额整块不渲染",
+      "remove": [],
+      "set": {
+        "ticketConfig": { "expense": { "showPart": false } }
+      }
+    },
+    {
+      "name": "单号为字符串",
+      "expect": "orderNumber 是纯字符串时也能正常渲染（环境差异兼容）",
+      "remove": [],
+      "set": {
+        "orderInfo.orderNumber": "#1"
+      }
+    }
+  ]
+}

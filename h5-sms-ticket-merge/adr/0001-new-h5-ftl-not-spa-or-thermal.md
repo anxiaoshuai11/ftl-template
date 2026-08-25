@@ -14,6 +14,6 @@
 
 ## 后果
 
-- 仓库/目录会多一张 `h5-sms-ticket-template.ftl`；打印两套旧文件保持独立。
+- 仓库/目录会多一张 `order-trade-ticket-template.ftl`；打印两套旧文件保持独立。
 - 布局约定与旧 FTL 对齐为 `table/tr/td`，降低后端接入成本。
 - 短信页可用 `max-width:430px`，不必锁 576。
