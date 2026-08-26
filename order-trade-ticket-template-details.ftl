@@ -144,14 +144,14 @@
     <#return rawWeight?round>
 </#function>
 
-<#-- 只保留数字，用于门店电话的识别与格式化 -->
+<#-- 只保留数字，用于门店与顾客电话的识别和格式化 -->
 <#function keepDigitsOnly rawText>
     <#return rawText?replace(r"[^0-9]", "", "r")>
 </#function>
 
-<#-- 判断门店信息里的某一行是否为电话：整行只由数字与电话常见分隔符组成，且恰好 10 位数字，
+<#-- 判断某一行是否为电话：整行只由数字与电话常见分隔符组成，且恰好 10 位数字，
      这样店名、地址这类含字母的行不会被误判。非字符串一律不当电话处理，避免正则匹配报错 -->
-<#function isStorePhoneLine rawText>
+<#function isTenDigitPhoneLine rawText>
     <#if !rawText?? || !rawText?is_string>
         <#return false>
     </#if>
@@ -165,8 +165,8 @@
     <#return keepDigitsOnly(trimmedText)?length == 10>
 </#function>
 
-<#-- 门店电话统一格式化成 3-3-4，位数不符则原样返回 -->
-<#function formatStorePhone rawText>
+<#-- 门店与顾客电话统一格式化成 3-3-4，位数不符则原样返回 -->
+<#function formatTenDigitPhone rawText>
     <#if !rawText?? || !rawText?is_string>
         <#return rawText>
     </#if>
@@ -335,8 +335,8 @@
                 <#assign merchantLine = merchantItem.content[0]!"">
                 <#if merchantLine?has_content>
                     <#-- 电话行按设计稿统一显示为 3-3-4 且加粗，其余行沿用后端下发的字重 -->
-                    <#assign isPhoneLine = isStorePhoneLine(merchantLine)>
-                    <#assign merchantText = isPhoneLine?then(formatStorePhone(merchantLine), merchantLine)>
+                    <#assign isPhoneLine = isTenDigitPhoneLine(merchantLine)>
+                    <#assign merchantText = isPhoneLine?then(formatTenDigitPhone(merchantLine), merchantLine)>
                     <#assign merchantBold = isPhoneLine?then(700, normalizeFontWeight(merchantItem.bold!400))>
                     <tr style="line-height:${setLineSpacing(merchantItem.fontSize!14, merchantLineSpace)}px;">
                         <td style="font-size:${merchantItem.fontSize!14}px;font-weight:${merchantBold};word-break:break-word;" colspan="12" align="center">
@@ -399,9 +399,11 @@
             <#list customerInfo.contentList as customerItem>
                 <#assign customerLine = customerItem.content[0]!"">
                 <#if customerLine?has_content>
+                    <#-- 顾客电话与门店电话保持一致，统一按 3-3-4 展示 -->
+                    <#assign customerText = isTenDigitPhoneLine(customerLine)?then(formatTenDigitPhone(customerLine), customerLine)>
                     <tr style="line-height:${setLineSpacing(customerItem.fontSize!14, customerLineSpace)}px;">
                         <td style="font-size:${customerItem.fontSize!14}px;font-weight:${normalizeFontWeight(customerItem.bold!400)};word-break:break-word;" colspan="12" align="center">
-                            <div>${customerLine}</div>
+                            <div>${customerText}</div>
                         </td>
                     </tr>
                 </#if>
@@ -578,6 +580,12 @@
 
         <#-- 整单备注 -->
         <#if orderNoteInfo?? && orderNoteInfo.contentList?? && orderNoteInfo.contentList?size gt 0>
+            <#-- 整单备注需要与餐品区隔开，避免备注紧贴最后一道餐品 -->
+            <tr>
+                <td class="w-100-f line-box" style="height:28px;" valign="center" colspan="12">
+                    <div class="line"></div>
+                </td>
+            </tr>
             <#assign noteLineSpace = (orderNoteInfo.block.lineSpace)!4>
             <#list orderNoteInfo.contentList as noteItem>
                 <tr style="line-height:${setLineSpacing(noteItem.fontSize!13, noteLineSpace)}px;">

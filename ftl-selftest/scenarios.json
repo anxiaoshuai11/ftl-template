@@ -78,7 +78,7 @@
     },
     {
       "name": "带整单备注",
-      "expect": "整单备注行正常渲染",
+      "expect": "整单备注正常渲染，备注上下均有分割线",
       "remove": [],
       "set": {
         "orderNoteInfo": {
@@ -160,6 +160,18 @@
       "remove": [],
       "set": {
         "merchantInfo.contentList[2]": {
+          "content": ["4782733578"],
+          "fontSize": 14,
+          "bold": 400
+        }
+      }
+    },
+    {
+      "name": "顾客电话未格式化",
+      "expect": "后端下发 4782733578 时，顾客电话按 478-273-3578 展示",
+      "remove": [],
+      "set": {
+        "customerInfo.contentList[3]": {
           "content": ["4782733578"],
           "fontSize": 14,
           "bold": 400
