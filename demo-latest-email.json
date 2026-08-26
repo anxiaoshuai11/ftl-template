@@ -1,0 +1,270 @@
+{
+  "customerInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "backgroundColor": 0,
+        "bold": 0,
+        "content": ["Pickup / Delivery: 08/26/2026 10:44 AM"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      }
+    ],
+    "tipType": 0
+  },
+  "mealInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "backgroundColor": 0,
+        "bold": 700,
+        "content": ["1", "苹果片", "$6.60"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      },
+      {
+        "backgroundColor": 0,
+        "bold": 700,
+        "content": ["1", "麦麦脆汁鸡（琵琶腿）", "$8.00"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      },
+      {
+        "backgroundColor": 0,
+        "bold": 700,
+        "content": ["1", "人气堡堡桶", "$58.90"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      }
+    ],
+    "tipType": 0
+  },
+  "merchantInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "backgroundColor": 0,
+        "bold": 700,
+        "content": ["fabler"],
+        "contentType": 0,
+        "fontSize": 18,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      },
+      {
+        "backgroundColor": 0,
+        "bold": 400,
+        "content": ["155 Hope St #2, Fall River, MA 02721"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      },
+      {
+        "backgroundColor": 0,
+        "bold": 400,
+        "content": ["7606668888"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      }
+    ],
+    "logo": ""
+  },
+  "orderAmountInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "backgroundColor": 0,
+        "bold": 0,
+        "content": ["Subtotal", "$73.50"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      },
+      {
+        "backgroundColor": 0,
+        "bold": 0,
+        "content": ["Taxes & Fees", "$41.22"],
+        "contentType": 0,
+        "fontSize": 14,
+        "id": "taxFees",
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      },
+      {
+        "backgroundColor": 0,
+        "bold": 0,
+        "content": ["Tip", "$8.82"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      },
+      {
+        "backgroundColor": 0,
+        "bold": 0,
+        "content": ["Processing Fee", "$3.44"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      },
+      {
+        "backgroundColor": 0,
+        "bold": 700,
+        "content": ["Total", "$126.98"],
+        "contentType": 0,
+        "fontSize": 22,
+        "id": "total",
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      }
+    ],
+    "tipType": 0
+  },
+  "orderInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "confirmationNumber": {
+      "backgroundColor": 0,
+      "bold": 0,
+      "content": [""],
+      "contentType": 0,
+      "fontSize": 14,
+      "lineSpace": 3,
+      "selected": 0,
+      "underLine": 0
+    },
+    "diningOption": {
+      "backgroundColor": 0,
+      "bold": 700,
+      "content": ["Delivery"],
+      "contentType": 0,
+      "fontSize": 14,
+      "lineSpace": 3,
+      "selected": 0,
+      "underLine": 0
+    },
+    "isPosPay": true,
+    "orderChannel": 0,
+    "orderNumber": {
+      "backgroundColor": 0,
+      "bold": 700,
+      "content": ["#3"],
+      "contentType": 0,
+      "fontSize": 28,
+      "lineSpace": 3,
+      "selected": 0,
+      "underLine": 0
+    },
+    "orderTime": {
+      "backgroundColor": 0,
+      "bold": 0,
+      "content": ["08/26/2026 10:44 AM"],
+      "contentType": 0,
+      "fontSize": 13,
+      "lineSpace": 3,
+      "selected": 0,
+      "underLine": 0
+    },
+    "orderType": 0,
+    "payType": 0,
+    "server": {
+      "backgroundColor": 0,
+      "bold": 0,
+      "content": ["fabler"],
+      "contentType": 0,
+      "fontSize": 13,
+      "lineSpace": 3,
+      "selected": 0,
+      "underLine": 0
+    }
+  },
+  "taxFeeDetailInfo": {
+    "contentList": [
+      {
+        "backgroundColor": 0,
+        "bold": 0,
+        "content": ["服务费B", "$16.17"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      },
+      {
+        "backgroundColor": 0,
+        "bold": 0,
+        "content": ["Tax", "$25.05"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      }
+    ],
+    "title": "Taxes & Fees"
+  },
+  "ticketConfig": {
+    "meal": {
+      "showPart": true
+    },
+    "merchant": {
+      "logo": true,
+      "showPart": true
+    },
+    "expense": {
+      "showPart": true
+    }
+  },
+  "tradeInfo": {
+    "block": {
+      "lineSpace": 4
+    },
+    "contentList": [
+      {
+        "backgroundColor": 0,
+        "bold": 600,
+        "content": ["Card ****1005", "$114.72"],
+        "contentType": 0,
+        "fontSize": 14,
+        "lineSpace": 3,
+        "selected": 0,
+        "underLine": 0
+      }
+    ],
+    "tipType": 0
+  }
+}
