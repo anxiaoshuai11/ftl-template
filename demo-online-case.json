@@ -63,10 +63,10 @@
     "tipType": 0,
     "contentList": [
       { "backgroundColor": 0, "bold": 0, "content": ["Subtotal", "$276.20"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
-      { "backgroundColor": 0, "bold": 0, "content": ["Tax & Fees", "$94.14"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
+      { "id": "taxFees", "backgroundColor": 0, "bold": 0, "content": ["Tax & Fees", "$94.14"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
       { "backgroundColor": 0, "bold": 0, "content": ["服务费B", "$60.76"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
       { "backgroundColor": 0, "bold": 0, "content": ["Tip", "$0.36"], "contentType": 0, "fontSize": 14, "lineSpace": 3, "selected": 0, "underLine": 0 },
-      { "backgroundColor": 0, "bold": 700, "content": ["Total", "$431.46"], "contentType": 0, "fontSize": 22, "lineSpace": 3, "selected": 0, "underLine": 0 }
+      { "id": "total", "backgroundColor": 0, "bold": 700, "content": ["Total", "$431.46"], "contentType": 0, "fontSize": 22, "lineSpace": 3, "selected": 0, "underLine": 0 }
     ]
   },
   "taxFeeDetailInfo": {

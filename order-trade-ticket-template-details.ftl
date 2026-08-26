@@ -99,49 +99,25 @@
         .card-wrap {
             width: 100%;
         }
-        .modal-mask {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.45);
-            z-index: 1000;
-        }
-        .modal-mask.is-open {
-            display: block;
-        }
-        .modal-panel {
-            width: 86%;
-            max-width: 340px;
-            margin: 20% auto 0;
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 18px 16px 16px;
-        }
-        .modal-confirm {
-            display: block;
+        /* 邮件版使用原生 details 折叠税费明细，不依赖任何脚本 */
+        .tax-fee-details {
             width: 100%;
-            margin-top: 18px;
-            border: none;
-            border-radius: 24px;
-            padding: 12px 16px;
-            background: #6f3cff;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
         }
-        .modal-close {
-            width: 28px;
-            height: 28px;
-            border: none;
-            background: transparent;
-            font-size: 22px;
-            line-height: 1;
-            color: #333333;
+        .tax-fee-summary {
             cursor: pointer;
+            list-style: none;
+        }
+        .tax-fee-summary::-webkit-details-marker {
+            display: none;
+        }
+        .tax-fee-detail-list {
+            margin: 4px 0 6px;
+            padding: 6px 0 2px 16px;
+            border-left: 2px solid #e2dcff;
+        }
+        .tax-fee-detail-row {
+            font-size: 0;
+            line-height: 22px;
         }
     </style>
 </head>
@@ -310,13 +286,12 @@
     <#assign serverLabelText = buildServerLabel(orderInfo.server!'')>
 </#if>
 
-<#-- 弹层严格展示客户端下发的明细，模版不识别或过滤费用类型 -->
+<#-- 折叠区严格展示客户端下发的明细，模版不识别或过滤费用类型 -->
 <#assign taxFeeVisibleItems = (taxFeeDetailInfo.contentList)![]>
-<#assign showTaxFeeModal = taxFeeVisibleItems?size gt 0>
+<#assign showTaxFeeDetails = taxFeeVisibleItems?size gt 0>
 
 <#-- 客户端通过固定 id 标识税费汇总行，模版不再根据字段或文案猜测 -->
 <#assign taxSummaryRowIndex = -1>
-<#assign taxSummaryLabelText = "">
 <#if orderAmountInfo?? && orderAmountInfo.contentList??>
     <#assign amountScanCursor = 0>
     <#list orderAmountInfo.contentList as amountItem>
@@ -324,22 +299,9 @@
             && amountItem.id?? && amountItem.id?is_string
             && amountItem.id == "taxFees">
             <#assign taxSummaryRowIndex = amountScanCursor>
-            <#assign taxSummaryLabelText = amountItem.content[0]!"">
         </#if>
         <#assign amountScanCursor = amountScanCursor + 1>
     </#list>
-</#if>
-
-<#-- 弹层标题优先复用金额区汇总行文案，保证同屏两处文案一致；其次才用后端下发的 title -->
-<#assign taxFeeModalTitleText = "Taxes & Fees">
-<#if taxFeeDetailInfo??>
-    <#assign taxFeeTitleFromServer = readText(taxFeeDetailInfo.title!'')>
-    <#if taxFeeTitleFromServer?has_content>
-        <#assign taxFeeModalTitleText = taxFeeTitleFromServer>
-    </#if>
-</#if>
-<#if taxSummaryLabelText?has_content>
-    <#assign taxFeeModalTitleText = taxSummaryLabelText>
 </#if>
 <#assign showPayment = tradeInfo?? && tradeInfo.contentList?? && tradeInfo.contentList?size gt 0>
 
@@ -642,32 +604,49 @@
                 <#-- 客户端通过固定 id 标识总计行，避免模版依赖展示文案 -->
                 <#assign isTotalRow = amountItem.id?? && amountItem.id?is_string && amountItem.id == "total">
                 <#-- 仅 id=taxFees 的汇总行显示明细图标 -->
-                <#assign showDetailIcon = showTaxFeeModal && (!isTotalRow) && (amountRowCursor == taxSummaryRowIndex)>
+                <#assign showDetailIcon = showTaxFeeDetails && (!isTotalRow) && (amountRowCursor == taxSummaryRowIndex)>
                 <#assign amountRowCursor = amountRowCursor + 1>
                 <#-- 设计稿：普通行左侧常规、右侧金额加粗；Total 行左侧 15px 加粗、右侧 22px 加粗 -->
                 <#assign amountLabelFontSize = isTotalRow?then(15, amountItem.fontSize!14)>
                 <#assign amountValueFontSize = isTotalRow?then(22, amountItem.fontSize!14)>
                 <#assign amountLabelBold = isTotalRow?then(700, normalizeFontWeight(amountItem.bold!400))>
                 <#assign amountRowValign = isTotalRow?then("bottom", "top")>
-                <tr>
-                    <td colspan="12">
-                        <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                            <tr style="line-height:${setLineSpacing(amountValueFontSize, amountLineSpace)}px;">
-                                <td style="width:70%;font-size:${amountLabelFontSize}px;font-weight:${amountLabelBold};" align="left" valign="${amountRowValign}">
-                                    <div>
-                                        ${amountLabel}
-                                        <#if showDetailIcon>
-                                            <span class="info-icon" id="taxFeeInfoBtn" role="button" aria-label="Taxes and Fees detail">i</span>
-                                        </#if>
-                                    </div>
-                                </td>
-                                <td style="width:30%;font-size:${amountValueFontSize}px;font-weight:700;" align="right" valign="${amountRowValign}">
-                                    <div>${amountValue}</div>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+                <#if showDetailIcon>
+                    <#-- 关键逻辑：summary 只放行内元素，点击整行即可原生展开，不使用 script -->
+                    <tr>
+                        <td colspan="12">
+                            <details class="tax-fee-details">
+                                <summary class="tax-fee-summary" style="line-height:${setLineSpacing(amountValueFontSize, amountLineSpace)}px;">
+                                    <span style="display:inline-block;width:70%;font-size:${amountLabelFontSize}px;font-weight:${amountLabelBold};vertical-align:top;box-sizing:border-box;">
+                                        ${amountLabel}<span class="info-icon" aria-hidden="true">i</span>
+                                    </span><span style="display:inline-block;width:30%;font-size:${amountValueFontSize}px;font-weight:700;text-align:right;vertical-align:top;box-sizing:border-box;">${amountValue}</span>
+                                </summary>
+                                <div class="tax-fee-detail-list">
+                                    <#list taxFeeVisibleItems as feeItem>
+                                        <div class="tax-fee-detail-row">
+                                            <span style="display:inline-block;width:70%;font-size:${feeItem.fontSize!13}px;font-weight:${normalizeFontWeight(feeItem.bold!400)};vertical-align:top;box-sizing:border-box;">${feeItem.content[0]!""}</span><span style="display:inline-block;width:30%;font-size:${feeItem.fontSize!13}px;font-weight:${normalizeFontWeight(feeItem.bold!400)};text-align:right;vertical-align:top;box-sizing:border-box;">${feeItem.content[1]!""}</span>
+                                        </div>
+                                    </#list>
+                                </div>
+                            </details>
+                        </td>
+                    </tr>
+                <#else>
+                    <tr>
+                        <td colspan="12">
+                            <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                <tr style="line-height:${setLineSpacing(amountValueFontSize, amountLineSpace)}px;">
+                                    <td style="width:70%;font-size:${amountLabelFontSize}px;font-weight:${amountLabelBold};" align="left" valign="${amountRowValign}">
+                                        <div>${amountLabel}</div>
+                                    </td>
+                                    <td style="width:30%;font-size:${amountValueFontSize}px;font-weight:700;" align="right" valign="${amountRowValign}">
+                                        <div>${amountValue}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </#if>
             </#list>
         </#if>
 
@@ -715,90 +694,5 @@
     </div>
 </div>
 
-<#-- Tax & Fee 明细弹层：仅有 taxFeeDetailInfo 时可用 -->
-<#if showTaxFeeModal>
-    <div class="modal-mask" id="taxFeeModal" aria-hidden="true">
-        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="taxFeeModalTitle">
-            <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td style="font-size:18px;font-weight:700;" align="left">
-                        <div id="taxFeeModalTitle">${taxFeeModalTitleText}</div>
-                    </td>
-                    <td style="width:40px;" align="right">
-                        <button type="button" class="modal-close" id="taxFeeCloseBtn" aria-label="Close">×</button>
-                    </td>
-                </tr>
-            </table>
-            <table class="w-100-f" style="margin-top:14px;" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                <#list taxFeeVisibleItems as feeItem>
-                    <tr style="line-height:22px;">
-                        <td style="font-size:14px;padding-bottom:10px;" align="left">
-                            <div>${feeItem.content[0]!""}</div>
-                        </td>
-                        <td style="font-size:14px;padding-bottom:10px;" align="right">
-                            <div>${feeItem.content[1]!""}</div>
-                        </td>
-                    </tr>
-                </#list>
-            </table>
-            <button type="button" class="modal-confirm" id="taxFeeConfirmBtn">Confirm</button>
-        </div>
-    </div>
-    <script>
-        (function () {
-            var modalNode = document.getElementById("taxFeeModal");
-            var openBtn = document.getElementById("taxFeeInfoBtn");
-            var closeBtn = document.getElementById("taxFeeCloseBtn");
-            var confirmBtn = document.getElementById("taxFeeConfirmBtn");
-            var lastOpenTime = 0;
-
-            function openModal(event) {
-                if (!modalNode) {
-                    return;
-                }
-                // 阻止冒泡，避免这次点击继续传到刚显示出来的遮罩上被判成"点遮罩关闭"
-                if (event && event.stopPropagation) {
-                    event.stopPropagation();
-                }
-                lastOpenTime = Date.now();
-                modalNode.classList.add("is-open");
-                modalNode.setAttribute("aria-hidden", "false");
-            }
-
-            function closeModal() {
-                if (!modalNode) {
-                    return;
-                }
-                // 焦点还留在弹层内时先移出，否则 aria-hidden 会被浏览器判为无障碍错误
-                if (document.activeElement && modalNode.contains(document.activeElement)) {
-                    document.activeElement.blur();
-                }
-                modalNode.classList.remove("is-open");
-                modalNode.setAttribute("aria-hidden", "true");
-            }
-
-            if (openBtn) {
-                openBtn.addEventListener("click", openModal);
-            }
-            if (closeBtn) {
-                closeBtn.addEventListener("click", closeModal);
-            }
-            if (confirmBtn) {
-                confirmBtn.addEventListener("click", closeModal);
-            }
-            if (modalNode) {
-                modalNode.addEventListener("click", function (event) {
-                    // 刚打开的瞬间忽略遮罩点击，挡住同一次点击造成的"开了又立刻关"
-                    if (Date.now() - lastOpenTime < 300) {
-                        return;
-                    }
-                    if (event.target === modalNode) {
-                        closeModal();
-                    }
-                });
-            }
-        })();
-    </script>
-</#if>
 </body>
 </html>

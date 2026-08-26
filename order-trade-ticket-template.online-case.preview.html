@@ -1,6 +1,6 @@
 <!--
   preview of: order-trade-ticket-template.ftl
-  data: demo-online-case.json（同事提供的线上真实数据）
+  data: demo-online-case.json
   generated-by: ftl-ticket-html-preview skill
   note: 静态展开，非服务端 FreeMarker 渲染；改 FTL 后请重新生成本文件
 -->
@@ -10,7 +10,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Order Receipt</title>
-    <style>
+<style>
         .w-100-f {
             width: 100%;
         }
@@ -67,28 +67,6 @@
             margin-left: 4px;
             vertical-align: middle;
         }
-        .store-logo {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #6f3cff;
-        }
-        .store-logo-fallback {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            margin: 0 auto;
-            background: #6f3cff;
-            text-align: center;
-            line-height: 56px;
-        }
-        .store-logo-fallback svg {
-            width: 28px;
-            height: 28px;
-            fill: #ffffff;
-            vertical-align: middle;
-        }
         /* 页头：浅紫底，通栏铺满 */
         .page-header {
             width: 100%;
@@ -108,6 +86,13 @@
             background-color: #ffffff;
             padding: 16px;
             box-sizing: border-box;
+        }
+        .store-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #6f3cff;
         }
         /* 热敏旧模版常用 div{width:99%}，H5 会把胶囊撑成整行，这里改为默认自适应 */
         div {
@@ -169,15 +154,6 @@
 <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;margin:0;padding:0;color:#111111;background-color:#ffffff;">
 <div style="max-width:430px;margin:0 auto;background-color:#f5f3ff;" class="w-100-f">
     <table class="page-header" role="presentation" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-                    <td colspan="12" style="padding-bottom:8px;" align="center">
-                        <div class="store-logo-fallback" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 8.5l-1.5-4.2A2 2 0 0017.6 3H6.4a2 2 0 00-1.9 1.3L3 8.5V10a2 2 0 002 2v7a1 1 0 001 1h12a1 1 0 001-1v-7a2 2 0 002-2V8.5zM6.4 5h11.2l1.1 3H5.3L6.4 5zM8 19v-5h8v5H8z"/>
-                            </svg>
-                        </div>
-                    </td>
-                </tr>
         <tr style="line-height:30.00px;">
             <td style="font-size:18px;font-weight:700;word-break:break-word;" colspan="12" align="center">
                 <div>fabler</div>
@@ -189,48 +165,32 @@
             </td>
         </tr>
         <tr style="line-height:23.33px;">
-            <td style="font-size:14px;font-weight:400;word-break:break-word;" colspan="12" align="center">
-                <div>7606668888</div>
+            <td style="font-size:14px;font-weight:700;word-break:break-word;" colspan="12" align="center">
+                <div>760-666-8888</div>
             </td>
         </tr>
     </table>
     <div class="card-wrap">
     <table class="ticket-card" style="overflow:hidden;" role="presentation" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-            <td colspan="12" style="padding:0;">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td class="w-50-f" style="font-size:28px;font-weight:700;word-break:break-word;" valign="top" align="left">
-                            <div>#3</div>
-                        </td>
-                        <td class="w-50-f" valign="middle" align="right" style="padding-left:8px;">
-                            <div class="order-badge" style="font-size:14px;">Delivery</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12" style="padding:0;">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td class="w-50-f" style="font-size:13px;color:#333333;padding-top:8px;" valign="top" align="left">
-                            <div>08/24/2026 04:51 PM</div>
-                        </td>
-                        <td class="w-50-f" style="font-size:13px;color:#333333;padding-top:8px;" valign="top" align="right">
-                            <div>Server: fabler</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+        <tr><td colspan="12" style="padding:0;">
+            <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr>
+                <td class="w-50-f" style="font-size:28px;font-weight:700;word-break:break-word;" valign="top" align="left"><div>#3</div></td>
+                <td class="w-50-f" valign="middle" align="right" style="padding-left:8px;"><div class="order-badge" style="font-size:14px;">Delivery</div></td>
+            </tr></table>
+        </td></tr>
+        <tr><td colspan="12" style="padding:0;">
+            <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr>
+                <td class="w-50-f" style="font-size:13px;color:#333333;padding-top:8px;" valign="top" align="left"><div>08/24/2026 04:51 PM</div></td>
+                <td class="w-50-f" style="font-size:13px;color:#333333;padding-top:8px;" valign="top" align="right"><div>Server: fabler</div></td>
+            </tr></table>
+        </td></tr>
         <tr>
             <td class="w-100-f line-box" style="height:28px;" valign="center" colspan="12">
                 <div class="line"></div>
             </td>
         </tr>
         <tr style="line-height:23.33px;">
-            <td style="font-size:14px;font-weight:0;word-break:break-word;" colspan="12" align="center">
+            <td style="font-size:14px;font-weight:400;word-break:break-word;" colspan="12" align="center">
                 <div>Pickup / Delivery: 2026-08-24T08:51:42.680734Z</div>
             </td>
         </tr>
@@ -239,471 +199,122 @@
                 <div class="line"></div>
             </td>
         </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">1</div>
-                        </td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">麦麦脆汁鸡（琵琶腿）</div>
-                        </td>
-                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top">
-                            <div class="word-break">$8.00</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">1</div>
-                        </td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">炸鸡天团桶</div>
-                        </td>
-                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top">
-                            <div class="word-break">$66.60</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">1</div>
-                        </td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">香芋派</div>
-                        </td>
-                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top">
-                            <div class="word-break">$10.90</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">1</div>
-                        </td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">菠萝派</div>
-                        </td>
-                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top">
-                            <div class="word-break">$9.90</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">1</div>
-                        </td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">人气堡堡桶</div>
-                        </td>
-                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top">
-                            <div class="word-break">$58.90</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">1</div>
-                        </td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">苹果片</div>
-                        </td>
-                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top">
-                            <div class="word-break">$6.60</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">1</div>
-                        </td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">那么大鸡排</div>
-                        </td>
-                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top">
-                            <div class="word-break">$18.60</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">1</div>
-                        </td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">三拼小食盒</div>
-                        </td>
-                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top">
-                            <div class="word-break">$12.80</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">1</div>
-                        </td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">麦麦汉堡桶</div>
-                        </td>
-                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top">
-                            <div class="word-break">$78.90</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">1</div>
-                        </td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">美汁源阳光橙</div>
-                        </td>
-                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top">
-                            <div class="word-break">$4.80</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:20.00px;">
-                        <td style="width:14px;" align="left" valign="top"><div></div></td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:0;color:#555555;" align="left" valign="top">
-                            <div class="word-break">+ 柠檬香</div>
-                        </td>
-                        <td style="width:80px;font-size:12px;font-weight:0;color:#555555;" align="right" valign="top">
-                            <div class="word-break"></div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:20.00px;">
-                        <td style="width:14px;" align="left" valign="top"><div></div></td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:0;color:#555555;" align="left" valign="top">
-                            <div class="word-break">+ 半糖</div>
-                        </td>
-                        <td style="width:80px;font-size:12px;font-weight:0;color:#555555;" align="right" valign="top">
-                            <div class="word-break"></div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:20.00px;">
-                        <td style="width:14px;" align="left" valign="top"><div></div></td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:0;color:#555555;" align="left" valign="top">
-                            <div class="word-break">+ 碎冰</div>
-                        </td>
-                        <td style="width:80px;font-size:12px;font-weight:0;color:#555555;" align="right" valign="top">
-                            <div class="word-break"></div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">1</div>
-                        </td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top">
-                            <div class="word-break">美汁源阳光橙</div>
-                        </td>
-                        <td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top">
-                            <div class="word-break">$0.20</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:20.00px;">
-                        <td style="width:14px;" align="left" valign="top"><div></div></td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:0;color:#555555;" align="left" valign="top">
-                            <div class="word-break">+ 半糖</div>
-                        </td>
-                        <td style="width:80px;font-size:12px;font-weight:0;color:#555555;" align="right" valign="top">
-                            <div class="word-break"></div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:20.00px;">
-                        <td style="width:14px;" align="left" valign="top"><div></div></td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:0;color:#555555;" align="left" valign="top">
-                            <div class="word-break">+ 不加冰</div>
-                        </td>
-                        <td style="width:80px;font-size:12px;font-weight:0;color:#555555;" align="right" valign="top">
-                            <div class="word-break"></div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:20.00px;">
-                        <td style="width:14px;" align="left" valign="top"><div></div></td>
-                        <td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:0;color:#555555;" align="left" valign="top">
-                            <div class="word-break">+ 香草</div>
-                        </td>
-                        <td style="width:80px;font-size:12px;font-weight:0;color:#555555;" align="right" valign="top">
-                            <div class="word-break"></div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:23.33px;"><td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">1</div></td><td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">麦麦脆汁鸡（琵琶腿）</div></td><td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div class="word-break">$8.00</div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:23.33px;"><td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">1</div></td><td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">炸鸡天团桶</div></td><td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div class="word-break">$66.60</div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:23.33px;"><td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">1</div></td><td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">香芋派</div></td><td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div class="word-break">$10.90</div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:23.33px;"><td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">1</div></td><td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">菠萝派</div></td><td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div class="word-break">$9.90</div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:23.33px;"><td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">1</div></td><td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">人气堡堡桶</div></td><td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div class="word-break">$58.90</div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:23.33px;"><td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">1</div></td><td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">苹果片</div></td><td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div class="word-break">$6.60</div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:23.33px;"><td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">1</div></td><td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">那么大鸡排</div></td><td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div class="word-break">$18.60</div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:23.33px;"><td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">1</div></td><td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">三拼小食盒</div></td><td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div class="word-break">$12.80</div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:23.33px;"><td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">1</div></td><td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">麦麦汉堡桶</div></td><td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div class="word-break">$78.90</div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:23.33px;"><td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">1</div></td><td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">美汁源阳光橙</div></td><td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div class="word-break">$4.80</div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:20.00px;"><td style="width:14px;" align="left" valign="top"><div></div></td><td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:400;color:#555555;" align="left" valign="top"><div class="word-break">+ 柠檬香</div></td><td style="width:80px;font-size:12px;font-weight:400;color:#555555;" align="right" valign="top"><div class="word-break"></div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:20.00px;"><td style="width:14px;" align="left" valign="top"><div></div></td><td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:400;color:#555555;" align="left" valign="top"><div class="word-break">+ 半糖</div></td><td style="width:80px;font-size:12px;font-weight:400;color:#555555;" align="right" valign="top"><div class="word-break"></div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:20.00px;"><td style="width:14px;" align="left" valign="top"><div></div></td><td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:400;color:#555555;" align="left" valign="top"><div class="word-break">+ 碎冰</div></td><td style="width:80px;font-size:12px;font-weight:400;color:#555555;" align="right" valign="top"><div class="word-break"></div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:23.33px;"><td style="width:14px;font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">1</div></td><td style="width:calc(100% - 14px - 80px);font-size:14px;font-weight:700;" align="left" valign="top"><div class="word-break">美汁源阳光橙</div></td><td style="width:80px;font-size:14px;font-weight:700;" align="right" valign="top"><div class="word-break">$0.20</div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:20.00px;"><td style="width:14px;" align="left" valign="top"><div></div></td><td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:400;color:#555555;" align="left" valign="top"><div class="word-break">+ 半糖</div></td><td style="width:80px;font-size:12px;font-weight:400;color:#555555;" align="right" valign="top"><div class="word-break"></div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:20.00px;"><td style="width:14px;" align="left" valign="top"><div></div></td><td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:400;color:#555555;" align="left" valign="top"><div class="word-break">+ 不加冰</div></td><td style="width:80px;font-size:12px;font-weight:400;color:#555555;" align="right" valign="top"><div class="word-break"></div></td></tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr style="line-height:20.00px;"><td style="width:14px;" align="left" valign="top"><div></div></td><td style="width:calc(100% - 14px - 80px);font-size:12px;font-weight:400;color:#555555;" align="left" valign="top"><div class="word-break">+ 香草</div></td><td style="width:80px;font-size:12px;font-weight:400;color:#555555;" align="right" valign="top"><div class="word-break"></div></td></tr></table></td></tr>
         <tr>
             <td class="w-100-f line-box" style="height:28px;" valign="center" colspan="12">
                 <div class="line"></div>
             </td>
         </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:36.67px;">
-                        <td style="width:70%;font-size:22px;font-weight:700;" align="left" valign="top">
-                            <div>
-                                Subtotal
-                            </div>
-                        </td>
-                        <td style="width:30%;font-size:22px;font-weight:700;" align="right" valign="top">
-                            <div>$276.20</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:70%;font-size:14px;font-weight:0;" align="left" valign="top">
-                            <div>
-                                Tax & Fees
-                                <span class="info-icon" id="taxFeeInfoBtn" role="button" aria-label="Taxes and Fees detail">i</span>
-                            </div>
-                        </td>
-                        <td style="width:30%;font-size:14px;font-weight:0;" align="right" valign="top">
-                            <div>$94.14</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:70%;font-size:14px;font-weight:0;" align="left" valign="top">
-                            <div>
-                                服务费B
-                            </div>
-                        </td>
-                        <td style="width:30%;font-size:14px;font-weight:0;" align="right" valign="top">
-                            <div>$60.76</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:70%;font-size:14px;font-weight:0;" align="left" valign="top">
-                            <div>
-                                Tip
-                            </div>
-                        </td>
-                        <td style="width:30%;font-size:14px;font-weight:0;" align="right" valign="top">
-                            <div>$0.36</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:36.67px;">
-                        <td style="width:70%;font-size:22px;font-weight:700;" align="left" valign="top">
-                            <div>
-                                Total
-                            </div>
-                        </td>
-                        <td style="width:30%;font-size:22px;font-weight:700;" align="right" valign="top">
-                            <div>$431.46</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+            <tr style="line-height:23.33px;">
+                <td style="width:70%;font-size:14px;font-weight:400;" align="left" valign="top"><div>Subtotal </div></td>
+                <td style="width:30%;font-size:14px;font-weight:700;" align="right" valign="top"><div>$276.20</div></td>
+            </tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+            <tr style="line-height:23.33px;">
+                <td style="width:70%;font-size:14px;font-weight:400;" align="left" valign="top"><div>Tax &amp; Fees <span class="info-icon" id="taxFeeInfoBtn" role="button" aria-label="Taxes and Fees detail">i</span></div></td>
+                <td style="width:30%;font-size:14px;font-weight:700;" align="right" valign="top"><div>$94.14</div></td>
+            </tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+            <tr style="line-height:23.33px;">
+                <td style="width:70%;font-size:14px;font-weight:400;" align="left" valign="top"><div>服务费B </div></td>
+                <td style="width:30%;font-size:14px;font-weight:700;" align="right" valign="top"><div>$60.76</div></td>
+            </tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+            <tr style="line-height:23.33px;">
+                <td style="width:70%;font-size:14px;font-weight:400;" align="left" valign="top"><div>Tip </div></td>
+                <td style="width:30%;font-size:14px;font-weight:700;" align="right" valign="top"><div>$0.36</div></td>
+            </tr></table></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+            <tr style="line-height:36.67px;">
+                <td style="width:70%;font-size:15px;font-weight:700;" align="left" valign="bottom"><div>Total </div></td>
+                <td style="width:30%;font-size:22px;font-weight:700;" align="right" valign="bottom"><div>$431.46</div></td>
+            </tr></table></td></tr>
         <tr>
             <td class="w-100-f line-box" style="height:28px;" valign="center" colspan="12">
                 <div class="line"></div>
             </td>
         </tr>
+        <tr><td colspan="12" style="font-size:15px;font-weight:700;padding-bottom:8px;" align="left"><div>Payment</div></td></tr>
+        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
+            <tr style="line-height:23.33px;">
+                <td style="width:70%;font-size:14px;font-weight:600;" align="left" valign="top"><div class="word-break">Card ****1012</div></td>
+                <td style="width:30%;font-size:14px;font-weight:600;" align="right" valign="top"><div>$0.20</div></td>
+            </tr></table></td></tr>
         <tr>
-            <td colspan="12" style="font-size:15px;font-weight:700;padding-bottom:8px;" align="left">
-                <div>Payment</div>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="12">
-                <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                    <tr style="line-height:23.33px;">
-                        <td style="width:70%;font-size:14px;font-weight:600;" align="left" valign="top">
-                            <div class="word-break">Card ****1012</div>
-                        </td>
-                        <td style="width:30%;font-size:14px;font-weight:600;" align="right" valign="top">
-                            <div>$0.20</div>
-                        </td>
-                    </tr>
-                </table>
+            <td class="w-100-f line-box" style="height:28px;" valign="center" colspan="12">
+                <div class="line"></div>
             </td>
         </tr>
         <tr><td colspan="12" style="height:8px;"></td></tr>
     </table>
     </div>
 </div>
-
 <div class="modal-mask" id="taxFeeModal" aria-hidden="true">
-        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="taxFeeModalTitle">
-            <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td style="font-size:18px;font-weight:700;" align="left">
-                        <div id="taxFeeModalTitle">Taxes & Fees</div>
-                    </td>
-                    <td style="width:40px;" align="right">
-                        <button type="button" class="modal-close" id="taxFeeCloseBtn" aria-label="Close">×</button>
-                    </td>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="taxFeeModalTitle">
+        <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr>
+            <td style="font-size:18px;font-weight:700;" align="left"><div id="taxFeeModalTitle">Tax &amp; Fees</div></td>
+            <td style="width:40px;" align="right"><button type="button" class="modal-close" id="taxFeeCloseBtn" aria-label="Close">&times;</button></td>
+        </tr></table>
+        <table class="w-100-f" style="margin-top:14px;" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr style="line-height:22px;">
+                    <td style="font-size:14px;padding-bottom:10px;" align="left"><div>服务费B</div></td>
+                    <td style="font-size:14px;padding-bottom:10px;" align="right"><div>$60.76</div></td>
                 </tr>
-            </table>
-            <table class="w-100-f" style="margin-top:14px;" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                    <tr style="line-height:22px;">
-                        <td style="font-size:14px;padding-bottom:10px;" align="left">
-                            <div>服务费B</div>
-                        </td>
-                        <td style="font-size:14px;padding-bottom:10px;" align="right">
-                            <div>$60.76</div>
-                        </td>
-                    </tr>
-                    <tr style="line-height:22px;">
-                        <td style="font-size:14px;padding-bottom:10px;" align="left">
-                            <div>Tax</div>
-                        </td>
-                        <td style="font-size:14px;padding-bottom:10px;" align="right">
-                            <div>$94.14</div>
-                        </td>
-                    </tr>
-            </table>
-            <button type="button" class="modal-confirm" id="taxFeeConfirmBtn">Confirm</button>
-        </div>
+                <tr style="line-height:22px;">
+                    <td style="font-size:14px;padding-bottom:10px;" align="left"><div>Tax</div></td>
+                    <td style="font-size:14px;padding-bottom:10px;" align="right"><div>$94.14</div></td>
+                </tr>
+        </table>
+        <button type="button" class="modal-confirm" id="taxFeeConfirmBtn">Confirm</button>
     </div>
-    <script>
-        (function () {
-            var modalNode = document.getElementById("taxFeeModal");
-            var openBtn = document.getElementById("taxFeeInfoBtn");
-            var closeBtn = document.getElementById("taxFeeCloseBtn");
-            var confirmBtn = document.getElementById("taxFeeConfirmBtn");
-
-            function openModal() {
-                if (!modalNode) {
-                    return;
-                }
-                modalNode.classList.add("is-open");
-                modalNode.setAttribute("aria-hidden", "false");
-            }
-
-            function closeModal() {
-                if (!modalNode) {
-                    return;
-                }
-                modalNode.classList.remove("is-open");
-                modalNode.setAttribute("aria-hidden", "true");
-            }
-
-            if (openBtn) {
-                openBtn.addEventListener("click", openModal);
-            }
-            if (closeBtn) {
-                closeBtn.addEventListener("click", closeModal);
-            }
-            if (confirmBtn) {
-                confirmBtn.addEventListener("click", closeModal);
-            }
-            if (modalNode) {
-                modalNode.addEventListener("click", function (event) {
-                    if (event.target === modalNode) {
-                        closeModal();
-                    }
-                });
-            }
-        })();
-    </script>
+</div>
+<script>
+(function () {
+    var modalNode = document.getElementById("taxFeeModal");
+    var openBtn = document.getElementById("taxFeeInfoBtn");
+    var closeBtn = document.getElementById("taxFeeCloseBtn");
+    var confirmBtn = document.getElementById("taxFeeConfirmBtn");
+    var lastOpenTime = 0;
+    function openModal(event) {
+        if (!modalNode) { return; }
+        if (event && event.stopPropagation) { event.stopPropagation(); }
+        lastOpenTime = Date.now();
+        modalNode.classList.add("is-open");
+        modalNode.setAttribute("aria-hidden", "false");
+    }
+    function closeModal() {
+        if (!modalNode) { return; }
+        if (document.activeElement && modalNode.contains(document.activeElement)) { document.activeElement.blur(); }
+        modalNode.classList.remove("is-open");
+        modalNode.setAttribute("aria-hidden", "true");
+    }
+    if (openBtn) { openBtn.addEventListener("click", openModal); }
+    if (closeBtn) { closeBtn.addEventListener("click", closeModal); }
+    if (confirmBtn) { confirmBtn.addEventListener("click", closeModal); }
+    if (modalNode) {
+        modalNode.addEventListener("click", function (event) {
+            if (Date.now() - lastOpenTime < 300) { return; }
+            if (event.target === modalNode) { closeModal(); }
+        });
+    }
+})();
+</script>
 </body>
 </html>

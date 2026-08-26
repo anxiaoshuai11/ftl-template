@@ -1,5 +1,5 @@
 <!--
-  preview of: order-trade-ticket-template.ftl
+  preview of: order-trade-ticket-template-details.ftl
   data: demo-merged-ticket.json
   generated-by: ftl-ticket-html-preview skill
   note: 静态展开，非服务端 FreeMarker 渲染；改 FTL 后请重新生成本文件
@@ -105,49 +105,25 @@
         .card-wrap {
             width: 100%;
         }
-        .modal-mask {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.45);
-            z-index: 1000;
-        }
-        .modal-mask.is-open {
-            display: block;
-        }
-        .modal-panel {
-            width: 86%;
-            max-width: 340px;
-            margin: 20% auto 0;
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 18px 16px 16px;
-        }
-        .modal-confirm {
-            display: block;
+        /* 邮件版使用原生 details 折叠税费明细，不依赖任何脚本 */
+        .tax-fee-details {
             width: 100%;
-            margin-top: 18px;
-            border: none;
-            border-radius: 24px;
-            padding: 12px 16px;
-            background: #6f3cff;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
         }
-        .modal-close {
-            width: 28px;
-            height: 28px;
-            border: none;
-            background: transparent;
-            font-size: 22px;
-            line-height: 1;
-            color: #333333;
+        .tax-fee-summary {
             cursor: pointer;
+            list-style: none;
+        }
+        .tax-fee-summary::-webkit-details-marker {
+            display: none;
+        }
+        .tax-fee-detail-list {
+            margin: 4px 0 6px;
+            padding: 6px 0 2px 16px;
+            border-left: 2px solid #e2dcff;
+        }
+        .tax-fee-detail-row {
+            font-size: 0;
+            line-height: 22px;
         }
     </style>
 </head>
@@ -236,11 +212,21 @@
                 <td style="width:70%;font-size:14px;font-weight:400;" align="left" valign="top"><div>Subtotal </div></td>
                 <td style="width:30%;font-size:14px;font-weight:700;" align="right" valign="top"><div>$12.00</div></td>
             </tr></table></td></tr>
-        <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
-            <tr style="line-height:23.33px;">
-                <td style="width:70%;font-size:14px;font-weight:400;" align="left" valign="top"><div>Taxes &amp; Fees <span class="info-icon" id="taxFeeInfoBtn" role="button" aria-label="Taxes and Fees detail">i</span></div></td>
-                <td style="width:30%;font-size:14px;font-weight:700;" align="right" valign="top"><div>$27.04</div></td>
-            </tr></table></td></tr>
+        <tr>
+            <td colspan="12">
+                <details class="tax-fee-details">
+                    <summary class="tax-fee-summary" style="line-height:23.33px;">
+                        <span style="display:inline-block;width:70%;font-size:14px;font-weight:400;vertical-align:top;box-sizing:border-box;">Taxes &amp; Fees<span class="info-icon" aria-hidden="true">i</span></span><span style="display:inline-block;width:30%;font-size:14px;font-weight:700;text-align:right;vertical-align:top;box-sizing:border-box;">$27.04</span>
+                    </summary>
+                    <div class="tax-fee-detail-list">
+                        <div class="tax-fee-detail-row"><span style="display:inline-block;width:70%;font-size:14px;font-weight:400;vertical-align:top;box-sizing:border-box;">Kiosk Fee (10%)</span><span style="display:inline-block;width:30%;font-size:14px;font-weight:400;text-align:right;vertical-align:top;box-sizing:border-box;">$3.16</span></div>
+                        <div class="tax-fee-detail-row"><span style="display:inline-block;width:70%;font-size:14px;font-weight:400;vertical-align:top;box-sizing:border-box;">Tax1 (12%)</span><span style="display:inline-block;width:30%;font-size:14px;font-weight:400;text-align:right;vertical-align:top;box-sizing:border-box;">$8.22</span></div>
+                        <div class="tax-fee-detail-row"><span style="display:inline-block;width:70%;font-size:14px;font-weight:400;vertical-align:top;box-sizing:border-box;">Tax2 (18%)</span><span style="display:inline-block;width:30%;font-size:14px;font-weight:400;text-align:right;vertical-align:top;box-sizing:border-box;">$12.50</span></div>
+                        <div class="tax-fee-detail-row"><span style="display:inline-block;width:70%;font-size:14px;font-weight:400;vertical-align:top;box-sizing:border-box;">OPF (10%)</span><span style="display:inline-block;width:30%;font-size:14px;font-weight:400;text-align:right;vertical-align:top;box-sizing:border-box;">$3.16</span></div>
+                    </div>
+                </details>
+            </td>
+        </tr>
         <tr><td colspan="12"><table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0">
             <tr style="line-height:23.33px;">
                 <td style="width:70%;font-size:14px;font-weight:400;" align="left" valign="top"><div>Gratuity </div></td>
@@ -286,63 +272,5 @@
     </table>
     </div>
 </div>
-<div class="modal-mask" id="taxFeeModal" aria-hidden="true">
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="taxFeeModalTitle">
-        <table class="w-100-f" role="presentation" border="0" cellpadding="0" cellspacing="0"><tr>
-            <td style="font-size:18px;font-weight:700;" align="left"><div id="taxFeeModalTitle">Taxes &amp; Fees</div></td>
-            <td style="width:40px;" align="right"><button type="button" class="modal-close" id="taxFeeCloseBtn" aria-label="Close">&times;</button></td>
-        </tr></table>
-        <table class="w-100-f" style="margin-top:14px;" role="presentation" border="0" cellpadding="0" cellspacing="0">
-                <tr style="line-height:22px;">
-                    <td style="font-size:14px;padding-bottom:10px;" align="left"><div>Kiosk Fee (10%)</div></td>
-                    <td style="font-size:14px;padding-bottom:10px;" align="right"><div>$3.16</div></td>
-                </tr>
-                <tr style="line-height:22px;">
-                    <td style="font-size:14px;padding-bottom:10px;" align="left"><div>Tax1 (12%)</div></td>
-                    <td style="font-size:14px;padding-bottom:10px;" align="right"><div>$8.22</div></td>
-                </tr>
-                <tr style="line-height:22px;">
-                    <td style="font-size:14px;padding-bottom:10px;" align="left"><div>Tax2 (18%)</div></td>
-                    <td style="font-size:14px;padding-bottom:10px;" align="right"><div>$12.50</div></td>
-                </tr>
-                <tr style="line-height:22px;">
-                    <td style="font-size:14px;padding-bottom:10px;" align="left"><div>OPF (10%)</div></td>
-                    <td style="font-size:14px;padding-bottom:10px;" align="right"><div>$3.16</div></td>
-                </tr>
-        </table>
-        <button type="button" class="modal-confirm" id="taxFeeConfirmBtn">Confirm</button>
-    </div>
-</div>
-<script>
-(function () {
-    var modalNode = document.getElementById("taxFeeModal");
-    var openBtn = document.getElementById("taxFeeInfoBtn");
-    var closeBtn = document.getElementById("taxFeeCloseBtn");
-    var confirmBtn = document.getElementById("taxFeeConfirmBtn");
-    var lastOpenTime = 0;
-    function openModal(event) {
-        if (!modalNode) { return; }
-        if (event && event.stopPropagation) { event.stopPropagation(); }
-        lastOpenTime = Date.now();
-        modalNode.classList.add("is-open");
-        modalNode.setAttribute("aria-hidden", "false");
-    }
-    function closeModal() {
-        if (!modalNode) { return; }
-        if (document.activeElement && modalNode.contains(document.activeElement)) { document.activeElement.blur(); }
-        modalNode.classList.remove("is-open");
-        modalNode.setAttribute("aria-hidden", "true");
-    }
-    if (openBtn) { openBtn.addEventListener("click", openModal); }
-    if (closeBtn) { closeBtn.addEventListener("click", closeModal); }
-    if (confirmBtn) { confirmBtn.addEventListener("click", closeModal); }
-    if (modalNode) {
-        modalNode.addEventListener("click", function (event) {
-            if (Date.now() - lastOpenTime < 300) { return; }
-            if (event.target === modalNode) { closeModal(); }
-        });
-    }
-})();
-</script>
 </body>
 </html>

@@ -126,6 +126,64 @@
       "set": {
         "orderInfo.orderNumber": "#1"
       }
+    },
+    {
+      "name": "费用行内外重复下发",
+      "expect": "模版不做去重，服务费在主票和弹层各显示一次；重复属数据侧问题，需后端不再平铺该行（禅道 6039）",
+      "remove": [],
+      "set": {
+        "orderAmountInfo.contentList": [
+          { "content": ["Subtotal", "$12.00"], "fontSize": 14, "bold": 400 },
+          { "id": "taxFees", "content": ["Taxes & Fees", "$27.04"], "fontSize": 14, "bold": 400 },
+          { "content": ["Kiosk Fee (10%)", "$3.16"], "fontSize": 14, "bold": 400 },
+          { "content": ["OPF (10%)", "$3.16"], "fontSize": 14, "bold": 400 },
+          { "content": ["Processing Fee", "$3.10"], "fontSize": 14, "bold": 400 },
+          { "id": "total", "content": ["Total", "$44.54"], "fontSize": 22, "bold": 700 }
+        ]
+      }
+    },
+    {
+      "name": "刷卡费误灌进弹层",
+      "expect": "模版原样展示客户端下发的弹层明细；Processing Fee 出现在弹层属于客户端数据问题",
+      "remove": [],
+      "set": {
+        "taxFeeDetailInfo.contentList": [
+          { "content": ["Kiosk Fee (10%)", "$3.16"], "fontSize": 14, "category": "service" },
+          { "content": ["Tax1 (12%)", "$8.22"], "fontSize": 14, "category": "tax" },
+          { "content": ["Processing Fee", "$3.10"], "fontSize": 14, "category": "processing" }
+        ]
+      }
+    },
+    {
+      "name": "门店电话未格式化",
+      "expect": "后端下发 4782733578 时模版补成 478-273-3578 并加粗（禅道 6041）",
+      "remove": [],
+      "set": {
+        "merchantInfo.contentList[2]": {
+          "content": ["4782733578"],
+          "fontSize": 14,
+          "bold": 400
+        }
+      }
+    },
+    {
+      "name": "汇总行未下发 ID",
+      "expect": "缺少 id=taxFees 时不显示明细图标，模版不按文案猜测",
+      "remove": ["orderAmountInfo.contentList[1].id"],
+      "set": {}
+    },
+    {
+      "name": "仅费用汇总行",
+      "expect": "汇总行文案可以是 Fees，只要下发 id=taxFees 就显示明细图标",
+      "remove": [],
+      "set": {
+        "orderAmountInfo.contentList[1].content": ["Fees", "$6.32"],
+        "taxFeeDetailInfo.title": "Fees",
+        "taxFeeDetailInfo.contentList": [
+          { "content": ["Kiosk Fee (10%)", "$3.16"], "fontSize": 14, "category": "service" },
+          { "content": ["OPF (10%)", "$3.16"], "fontSize": 14, "category": "platform" }
+        ]
+      }
     }
   ]
 }

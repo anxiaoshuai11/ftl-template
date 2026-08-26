@@ -31,7 +31,7 @@
     "block": { "lineSpace": 4 },
     "contentList": [
       { "content": ["Subtotal", "$9.00"], "fontSize": 14 },
-      { "content": ["Total", "$9.72"], "fontSize": 14, "isTotal": true }
+      { "id": "total", "content": ["Total", "$9.72"], "fontSize": 14 }
     ]
   }
 }

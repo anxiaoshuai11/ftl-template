@@ -163,10 +163,10 @@
         "bold": 400
       },
       {
+        "id": "taxFees",
         "content": ["Taxes & Fees", "$27.04"],
         "fontSize": 14,
-        "bold": 400,
-        "showDetailIcon": true
+        "bold": 400
       },
       {
         "content": ["Gratuity", "$1.20"],
@@ -184,10 +184,10 @@
         "bold": 400
       },
       {
+        "id": "total",
         "content": ["Total", "$44.54"],
         "fontSize": 22,
-        "bold": 700,
-        "isTotal": true
+        "bold": 700
       }
     ]
   },
