@@ -36,7 +36,7 @@ node ftl-selftest/run-selftest.mjs <模版.ftl> <数据.json> [报告输出路�
 ### 场景套件批量自测（推荐）
 
 ```bash
-node ftl-selftest/run-suite.mjs <模版.ftl> [场景定义.json]
+node ftl-selftest/run-suite.mjs <模版.ftl> [场景定义.json] [报告输出路径]
 ```
 
 按 `ftl-selftest/scenarios.json` 从一份基线数据派生多组场景，一次跑完，产出
@@ -52,14 +52,35 @@ node ftl-selftest/run-regression.mjs <模版.ftl> <数据.json> [基线ref] [报
 产出 `<模版名>.regression.md`，**只列差异**：本次引入的问题、本次消除的问题、新增的顶层分支。
 退出码 0 = 没引入新问题。
 
-报告默认写在模版同级目录，而模版通常就在目标仓库里，会污染人家的工作区。
-所以第四个参数请显式指到仓库外，例如 `/tmp/xxx.regression.md`。
-
 改现有模版时，「改完还剩几个问题」没有意义，「哪些问题是这次改出来的」才有意义——
 老模版本来就带着的告警不该拦住你，你新写出来的空值风险必须拦住你。
 
 问题指纹按内容比对而非行号，代码整体位移不会产生误报。新增模版没有基线版本，
 脚本会提示改用 `run-suite.mjs`。
+
+## 报告写到哪里
+
+模版通常就在目标业务仓库里（如 `print-util/src/main/resources/templates/`），
+报告默认落在模版旁边，也就等于写进了人家的工作区。报告是过程材料，提 MR 走附件区，不该入库。
+
+**这条不靠自觉，脚本会拦。** 三个入口都会在写文件前检查报告落点：
+若该位置属于某个 git 仓库、且不是本工具自己的工作目录，直接报错退出，不产生任何文件。
+
+```text
+拒绝把报告写进目标仓库：/path/to/print-util
+  本次报告路径：.../templates/xxx.selftest-suite.md
+请把报告输出路径显式指到仓库外，例如：
+  /tmp/xxx.selftest-suite.md
+```
+
+所以跑目标仓库里的模版时，**必须显式给出最后一个参数**：
+
+```bash
+node ftl-selftest/run-suite.mjs <目标仓库的模版.ftl> ftl-selftest/scenarios.json /tmp/xxx.selftest-suite.md
+node ftl-selftest/run-regression.mjs <目标仓库的模版.ftl> <数据.json> HEAD /tmp/xxx.regression.md
+```
+
+模版本来就在本工具目录下时不受影响，报告照常写在模版旁边。
 
 ## 报告怎么读
 
@@ -91,6 +112,14 @@ node ftl-selftest/run-regression.mjs <模版.ftl> <数据.json> [基线ref] [报
 
 `remove` 和 `set` 的路径支持 `a.b.c` 和 `a.b[0].c`。`set` 会自动补建中间层。
 
+顶层的 `base` 指向基线数据，可以写成字符串，也可以写成候选列表（取第一个存在的）：
+
+```json
+"base": ["../demo-merged-ticket.json", "../examples/order-trade-ticket/demo-merged-ticket.json"]
+```
+
+这样同一份场景定义可以放在布局不同的目录里，不必为一行路径各维护一份。
+
 加场景的依据来自报告的「用例还缺的顶层分支」章节——它会直接告诉你哪个条件从没为真过。
 目标是把该章节清空。
 
@@ -116,14 +145,21 @@ node ftl-selftest/run-regression.mjs <模版.ftl> <数据.json> [基线ref] [报
 
 ```text
 改 / 新建 xxx.ftl
-  → 改现有模版：node ftl-selftest/run-regression.mjs xxx.ftl data.json   # 引入的问题清零
-  → node ftl-selftest/run-suite.mjs xxx.ftl                              # 出自测结论
+  → 改现有模版：node ftl-selftest/run-regression.mjs xxx.ftl data.json /tmp/xxx.regression.md
+                                                                       # 引入的问题清零
+  → node ftl-selftest/run-suite.mjs xxx.ftl ftl-selftest/scenarios.json /tmp/xxx.selftest-suite.md
+                                                                       # 出自测结论
   → 错误全部修掉，告警逐条确认
   → 报告里「用例还缺的分支」清空（不够就补 scenarios.json）
-  → 用 ftl-ticket-html-preview 出预览，人眼看样式
+  → 用 ftl-ticket-html-preview 重新生成预览，人眼看样式
+  → node preview/check-preview-fresh.mjs xxx.ftl                       # 确认预览不是上一版
   → 把自测报告贴进 MR 描述
   → 提 MR，人工评审
 ```
+
+**预览那一步不能拿现成文件顶替。** 改了 FTL 就要重新生成预览，
+然后跑 `check-preview-fresh.mjs` 用指纹确认它确实是当前版本——
+复用一份看起来没问题的旧预览，是这条链路上最难被发现的错误。
 
 从飞书需求文档一路走到提 MR 的完整链路（含建分支、写 MR 描述），用 `ftl-ticket-workflow` skill。
 
@@ -146,3 +182,4 @@ node ftl-selftest/run-selftest.mjs <模版.ftl> ftl-selftest/fixtures/broken-tic
 - 为了让报告好看而放宽检查，或直接删掉报错的用例
 - 只贴结论不贴报告路径
 - 把报告文件提交进模版仓库——它是过程材料，提 MR 时走 GitLab 附件区上传
+- 复用一份现成的预览 HTML 冒充本次产物，而不重新生成并校验指纹

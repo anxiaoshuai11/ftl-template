@@ -20,6 +20,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { analyzeTemplate, SEVERITY_ERROR, SCOPE_DATA } from './run-selftest.mjs';
 import { TRUE } from './condition-evaluator.mjs';
+import { resolveReportPath, runCli } from './report-target.mjs';
 
 function runGit(repositoryPath, args) {
   return execFileSync('git', ['-C', repositoryPath, ...args], { encoding: 'utf8' });
@@ -207,9 +208,7 @@ function main() {
   }
   lines.push('');
 
-  const reportPath = reportPathArgument
-    ? resolve(reportPathArgument)
-    : resolve(dirname(templatePath), `${basename(templatePath).replace(/\.ftl$/, '')}.regression.md`);
+  const reportPath = resolveReportPath(templatePath, reportPathArgument, '.regression.md');
   writeFileSync(reportPath, lines.join('\n'), 'utf8');
 
   console.log(`基线：${baselineRef}`);
@@ -222,4 +221,4 @@ function main() {
   process.exit(introducedFindings.length > 0 ? 1 : 0);
 }
 
-main();
+runCli(main);

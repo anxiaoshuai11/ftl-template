@@ -11,11 +11,12 @@
  * 退出码：0 = 全部场景无错误，1 = 至少一个场景有错误。
  */
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { basename, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { analyzeTemplate, SEVERITY_ERROR, SCOPE_DATA } from './run-selftest.mjs';
 import { TRUE, UNKNOWN } from './condition-evaluator.mjs';
+import { resolveReportPath, runCli } from './report-target.mjs';
 
 /** 把 `a.b[0].c` 拆成可逐级下钻的片段 */
 function splitPath(pathText) {
@@ -72,10 +73,40 @@ function buildScenarioData(baseData, scenario) {
   return scenarioData;
 }
 
+/**
+ * 定位基线数据。
+ *
+ * 同一份场景定义会被放在布局不同的目录里（工具仓把示例数据收在 examples/ 下，
+ * 日常工作目录则平铺在根目录），`base` 因此允许写成候选列表，取第一个存在的。
+ * 这样两处不必各维护一份只差一行路径的 scenarios.json。
+ */
+function resolveBaseDataPath(scenarioPath, baseConfig) {
+  const candidatePaths = Array.isArray(baseConfig) ? baseConfig : [baseConfig];
+  const scenarioDirectory = dirname(scenarioPath);
+
+  for (const candidate of candidatePaths) {
+    const candidatePath = resolve(scenarioDirectory, candidate);
+    if (existsSync(candidatePath)) {
+      return candidatePath;
+    }
+  }
+
+  throw new Error(
+    [
+      '找不到场景定义里的基线数据，以下路径都不存在：',
+      ...candidatePaths.map((candidate) => `  ${resolve(scenarioDirectory, candidate)}`),
+      '',
+      '请检查 scenarios.json 的 base 字段，或把基线数据放到其中任一位置。',
+    ].join('\n')
+  );
+}
+
 function main() {
-  const [templatePath, scenarioPathArgument] = process.argv.slice(2);
+  const [templatePath, scenarioPathArgument, reportPathArgument] = process.argv.slice(2);
   if (!templatePath) {
-    console.error('用法：node ftl-selftest/run-suite.mjs <模版.ftl> [场景定义.json]');
+    console.error(
+      '用法：node ftl-selftest/run-suite.mjs <模版.ftl> [场景定义.json] [报告输出路径]'
+    );
     process.exit(1);
   }
 
@@ -84,7 +115,17 @@ function main() {
     scenarioPathArgument || fileURLToPath(new URL('./scenarios.json', import.meta.url))
   );
   const scenarioConfig = JSON.parse(readFileSync(scenarioPath, 'utf8'));
-  const basePath = resolve(dirname(scenarioPath), scenarioConfig.base);
+
+  // 容易误把数据 json 当场景定义传进来（run-selftest 的第二个参数正是数据 json），给一句人话提示
+  if (!scenarioConfig.base || !Array.isArray(scenarioConfig.scenarios)) {
+    console.error(
+      `${basename(scenarioPath)} 不是场景定义文件：缺少 base 或 scenarios 字段。\n` +
+        '第二个参数要传场景定义（如 ftl-selftest/scenarios.json），不是小票数据 json。\n' +
+        '只想拿一份数据跑单次自测，请改用 run-selftest.mjs <模版.ftl> <数据.json>。'
+    );
+    process.exit(1);
+  }
+  const basePath = resolveBaseDataPath(scenarioPath, scenarioConfig.base);
   const baseData = JSON.parse(readFileSync(basePath, 'utf8'));
   const rawSource = readFileSync(templatePath, 'utf8');
 
@@ -225,10 +266,8 @@ function main() {
     lines.push('');
   }
 
-  const reportPath = resolve(
-    dirname(templatePath),
-    `${basename(templatePath).replace(/\.ftl$/, '')}.selftest-suite.md`
-  );
+  // 模版常在目标仓库里，报告默认落在它旁边会污染工作区，可用第三个参数指到仓库外
+  const reportPath = resolveReportPath(templatePath, reportPathArgument, '.selftest-suite.md');
   writeFileSync(reportPath, lines.join('\n'), 'utf8');
 
   console.log(`场景数：${results.length}`);
@@ -242,4 +281,4 @@ function main() {
   process.exit(totalErrors > 0 ? 1 : 0);
 }
 
-main();
+runCli(main);

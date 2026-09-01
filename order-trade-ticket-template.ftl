@@ -168,6 +168,16 @@
     <#return rawWeight?round>
 </#function>
 
+<#-- 仅当文案以 Note: 开头时加粗该前缀，后文沿用单元格原有字重 -->
+<#macro noteAwareText rawText>
+    <#assign noteFullText = rawText!"">
+    <#if noteFullText?is_string && noteFullText?index_of("Note:") == 0>
+        <span style="font-weight:700;">Note:</span>${noteFullText?substring(5)}
+    <#else>
+        ${noteFullText}
+    </#if>
+</#macro>
+
 <#-- 只保留数字，用于门店电话的识别与格式化 -->
 <#function keepDigitsOnly rawText>
     <#return rawText?replace(r"[^0-9]", "", "r")>
@@ -544,9 +554,9 @@
                                             <td style="width:calc(100% - ${qtyWidth}px - 80px);font-size:${modifierItem.fontSize!12}px;font-weight:${normalizeFontWeight(modifierItem.bold!400)};color:#555555;" align="left" valign="top">
                                                 <div class="word-break">
                                                     <#if modifierItem.content?size gte 2>
-                                                        ${modifierItem.content[1]!""}
+                                                        <@noteAwareText rawText=modifierItem.content[1]!"" />
                                                     <#else>
-                                                        ${modifierItem.content[0]!""}
+                                                        <@noteAwareText rawText=modifierItem.content[0]!"" />
                                                     </#if>
                                                 </div>
                                             </td>
@@ -561,9 +571,9 @@
                                             <td style="width:70%;font-size:${modifierItem.fontSize!12}px;font-weight:${normalizeFontWeight(modifierItem.bold!400)};color:#555555;" align="left" valign="top">
                                                 <div class="word-break">
                                                     <#if modifierItem.content?size gte 2>
-                                                        ${modifierItem.content[1]!modifierItem.content[0]!""}
+                                                        <@noteAwareText rawText=modifierItem.content[1]!modifierItem.content[0]!"" />
                                                     <#else>
-                                                        ${modifierItem.content[0]!""}
+                                                        <@noteAwareText rawText=modifierItem.content[0]!"" />
                                                     </#if>
                                                 </div>
                                             </td>
@@ -592,14 +602,14 @@
                                         <#if contentSize gte 3>
                                             <td style="width:${qtyWidth}px;" align="left" valign="top"><div></div></td>
                                             <td style="width:calc(100% - ${qtyWidth}px - 80px);font-size:${remarkItem.fontSize!12}px;font-weight:${normalizeFontWeight(remarkItem.bold!400)};color:#555555;" align="left" valign="top">
-                                                <div class="word-break">${remarkItem.content[1]!remarkItem.content[0]!""}</div>
+                                                <div class="word-break"><@noteAwareText rawText=remarkItem.content[1]!remarkItem.content[0]!"" /></div>
                                             </td>
                                             <td style="width:80px;font-size:${remarkItem.fontSize!12}px;font-weight:${normalizeFontWeight(remarkItem.bold!400)};color:#555555;" align="right" valign="top">
                                                 <div class="word-break">${remarkItem.content[2]!""}</div>
                                             </td>
                                         <#else>
                                             <td style="width:70%;font-size:${remarkItem.fontSize!12}px;font-weight:${normalizeFontWeight(remarkItem.bold!400)};color:#555555;" align="left" valign="top">
-                                                <div class="word-break">${remarkItem.content[1]!remarkItem.content[0]!""}</div>
+                                                <div class="word-break"><@noteAwareText rawText=remarkItem.content[1]!remarkItem.content[0]!"" /></div>
                                             </td>
                                             <td style="width:30%;font-size:${remarkItem.fontSize!12}px;font-weight:${normalizeFontWeight(remarkItem.bold!400)};color:#555555;" align="right" valign="top">
                                                 <div class="word-break">${remarkItem.content[2]!""}</div>
@@ -620,7 +630,7 @@
             <#list orderNoteInfo.contentList as noteItem>
                 <tr style="line-height:${setLineSpacing(noteItem.fontSize!13, noteLineSpace)}px;">
                     <td style="font-size:${noteItem.fontSize!13}px;font-weight:${normalizeFontWeight(noteItem.bold!400)};" colspan="12" align="left">
-                        <div class="word-break">${noteItem.content[0]!""}</div>
+                        <div class="word-break"><@noteAwareText rawText=noteItem.content[0]!"" /></div>
                     </td>
                 </tr>
             </#list>

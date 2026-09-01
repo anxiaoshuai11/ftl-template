@@ -79,4 +79,4 @@ Status: ready-for-agent
 
 - grill-me 已锁定口径后再写模版；图稿与口头不一致时以口头/ADR 为准（胶囊不带桌台）。
 - OKR 材料拆成 KR1/KR2/KR3 三份 md，见同级目录与 `specs/03-okr-showroom-docs.md`。
-- 手写基线估时 14h，AI 目标约 7h；实测以 KR3 采集表为准。
+- 手写基线估时原为 14h、AI 目标约 7h；上报口径已改为全周期（含需求理解 + grill-me），以 KR3 采集表为准（16.5h / 13.2h / 节省 20%）。

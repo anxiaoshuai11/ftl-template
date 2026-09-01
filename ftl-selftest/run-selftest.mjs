@@ -16,8 +16,9 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
-import { basename, dirname, join } from 'node:path';
+import { basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { resolveReportPath, runCli } from './report-target.mjs';
 import {
   blankComments,
   scanDirectives,
@@ -881,9 +882,7 @@ function main() {
     unusedDataKeys,
   });
 
-  const reportPath =
-    reportPathArgument ||
-    join(dirname(templatePath), `${templateFileName.replace(/\.ftl$/, '')}.selftest.md`);
+  const reportPath = resolveReportPath(templatePath, reportPathArgument, '.selftest.md');
   writeFileSync(reportPath, report.content, 'utf8');
 
   console.log(`模版：${templateFileName}`);
@@ -899,5 +898,5 @@ function main() {
 
 // 被 run-suite 引入时不执行 CLI 逻辑
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  main();
+  runCli(main);
 }

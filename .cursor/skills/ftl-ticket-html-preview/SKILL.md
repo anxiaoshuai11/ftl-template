@@ -56,13 +56,15 @@ Agent **手工/脚本展开** FTL 为静态 HTML：
   preview of: <ftl文件名>
   data: <json文件名或 inline>
   generated-by: ftl-ticket-html-preview skill
+  source-sha256: <源 FTL 内容指纹，由 check-preview-fresh.mjs --stamp 盖>
   note: 静态展开，非服务端 FreeMarker 渲染；改 FTL 后请重新生成本文件
 -->
 ```
 
 ### 业务分支不要猜错
 
-若项目有 `adr/` / `grill-me-conversation.md` / spec，预览必须遵守已锁定口径（例如胶囊不拼桌台、支付只用 tradeInfo、无 taxFeeDetailInfo 则无 `i`）。
+若需求文档里已经锁定了口径（例如胶囊不拼桌台、支付只用 `tradeInfo`、无 `taxFeeDetailInfo` 则不显示 `i` 图标），
+预览必须遵守，不能按自己的理解改。
 
 无文档时：严格按当前 FTL 的 `#if` 条件对 Demo 数据求值。
 
@@ -72,11 +74,34 @@ Agent **手工/脚本展开** FTL 为静态 HTML：
 改/生成 xxx.ftl
   → 确认/更新 demo JSON（字段要对得上）
   → 生成/覆盖 xxx.preview.html
+  → node preview/check-preview-fresh.mjs --stamp xxx.ftl    # 盖上源 FTL 指纹
   → 回复用户：预览文件路径 + 「用浏览器打开即可看样式」
 ```
 
 若只改了样式/结构、数据不变：仍要刷新 preview HTML。  
 若用户只要改数据看效果：可只更新 JSON 再重生 preview。
+
+## 指纹校验：防止拿旧预览顶替
+
+目录里常年躺着好几份历史预览，文件名相近（`xxx.preview.html`、`xxx-details.preview.html`、
+`xxx.online-case.preview.html`），打开都能正常渲染，肉眼分不出是哪一版的产物。
+**拿旧的顶替是这条链路上最难发现的错误**——页面一切正常，只是展示的是上一个版本的样式。
+
+所以生成完必须盖指纹，用之前必须校验：
+
+```bash
+# 生成预览后立刻盖指纹
+node preview/check-preview-fresh.mjs --stamp <模版.ftl> [预览.html]
+
+# 提 MR 前 / 把预览给别人之前，校验它确实对应当前 FTL
+node preview/check-preview-fresh.mjs <模版.ftl> [预览.html]
+```
+
+指纹是源 FTL 内容的 sha256 前 16 位，写在头部注释的 `source-sha256` 里。
+FTL 改过而预览没重生成，校验会报出两个不一致的指纹并以退出码 1 退出。
+
+预览文件名与模版不同名时（比如模版叫 `a.ftl`、预览叫 `a-details.preview.html`），
+第二个参数显式给出预览路径，不要靠默认推导。
 
 ## 质量要求
 
@@ -89,5 +114,7 @@ Agent **手工/脚本展开** FTL 为静态 HTML：
 ## 禁止
 
 - 只改 FTL 却忘记更新 preview
+- 从目录里挑一份现成的 preview 当作本次产物（哪怕它碰巧是对的，也必须校验指纹再用）
+- 生成 preview 后不盖指纹，导致后续无法判断新鲜度
 - 把未展开的 `<#if>` / `${}` 留在 preview 里导致页面空白或原文暴露
 - 为了预览去改客户端工程或要求用户部署

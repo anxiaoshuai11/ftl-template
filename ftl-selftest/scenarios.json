@@ -6,7 +6,10 @@
     "remove": "要删掉的字段路径数组，支持 a.b.c 与 a.b[0]",
     "set": "要设置的字段，键是路径，值是内容"
   },
-  "base": "../demo-merged-ticket.json",
+  "base": [
+    "../demo-merged-ticket.json",
+    "../examples/order-trade-ticket/demo-merged-ticket.json"
+  ],
   "scenarios": [
     {
       "name": "基线-完整数据",
