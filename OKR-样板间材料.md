@@ -17,6 +17,7 @@
 | 小票模版 MR | [print-util !88](http://gitlab.zbspos.com/posbee-microservice/print-util/-/merge_requests/88) |
 | 工具链与 skill 仓库 | [Shawn/ftl-util](http://gitlab.zbspos.com/Shawn/ftl-util) |
 | 完整案例（FTL + JSON + MR 描述范例） | `ftl-util` 的 `examples/order-trade-ticket/` |
+| Chrome 扩展 · FTL 小票预览 | [common-util/browser-extend](http://gitlab.zbspos.com/common-util/browser-extend) |
 
 业务需求：[订单短信/邮件小票样式优化](https://zath6evqnvz.feishu.cn/wiki/KOokwhaejicNWpkVyG9c5618n8b)
 
@@ -28,7 +29,12 @@
 git clone http://gitlab.zbspos.com/Shawn/ftl-util.git
 ```
 
-用 Cursor 打开，三个 skill 自动生效，然后给三样东西：需求文档链接、FTL、JSON。
+用 Cursor 打开，四个 skill 自动生效。
+
+- **小票模版**：给需求文档链接、FTL、JSON，走 `ftl-ticket-workflow`
+- **其他需求**：给需求文档链接和目标仓库，走 `req-to-mr`，同一条链路（飞书需求 → 编码 → 自测出报告 → 提 MR），不绑定技术栈
+
+只看小票样式可装 Chrome 扩展「FTL 小票预览」，不替代自测和提 MR。
 详见 [KR1 可复用案例](https://zath6evqnvz.feishu.cn/wiki/ATglwvtpAidD85kHEjfcPkUQnVe)。
 
 ## 本地文件（Cursor / Git 可点，飞书不解析）

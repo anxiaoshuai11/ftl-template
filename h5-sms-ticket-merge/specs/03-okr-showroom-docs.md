@@ -18,7 +18,7 @@ O2 要求三个 KR：**可复用案例、实践文档、效率基线**。不能�
 
 ## Solution
 
-KR 各一份 md；另建本 `h5-sms-ticket-merge/` 作为 tip-pool 同款的 grill-me 文件上下文（`adr/` + `spec.md` + `specs/`）。工时口径：全周期含需求理解与 grill-me，上报节省约 20%；采集表见 KR3。
+KR 各一份 md；另建本 `h5-sms-ticket-merge/` 作为 tip-pool 同款的 grill-me 文件上下文（`adr/` + `spec.md` + `specs/`）。工时口径：全周期含需求理解与 grill-me，上报节省约 30%；采集表见 KR3。
 
 ## User Stories
 

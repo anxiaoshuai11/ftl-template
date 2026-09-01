@@ -11,11 +11,12 @@
 
 ---
 
-## 1. 案例一句话介绍（可贴样板间首页）
+## 1. 案例介绍
 
 > 把「订单小票 + 交易小票」两套热敏 FTL/JSON，收敛成短信短链场景下的**一张 H5 FreeMarker 模版**，
-> 并把「飞书需求 → 编码 → 自测出报告 → 提 MR」这条链路固化成可执行的工具与 skill，
-> 下一个人做同类需求不用再重走一遍，**给三样东西就能跑**：需求文档链接、FTL、JSON。
+> 并把「飞书需求 → 编码 → 自测出报告 → 提 MR」固化成可执行的工具与 skill。
+> 小票需求给三样东西就能跑：需求文档链接、FTL、JSON。
+> 其他需求走同一条链路：给飞书文档链接和目标仓库即可（`req-to-mr`，不绑定技术栈）。
 
 ---
 
@@ -26,11 +27,14 @@
 | 合并后的 H5 小票模版 | [print-util !88](http://gitlab.zbspos.com/posbee-microservice/print-util/-/merge_requests/88) | 已提 MR，待评审合入 |
 | 工具链与 skill 仓库 | [Shawn/ftl-util](http://gitlab.zbspos.com/Shawn/ftl-util) | 已发布，clone 即用 |
 | 完整案例（FTL + JSON + MR 描述范例） | `ftl-util` 的 `examples/order-trade-ticket/` | 已交付 |
+| Chrome 扩展 · FTL 小票预览 | [common-util/browser-extend](http://gitlab.zbspos.com/common-util/browser-extend) | 已发布；开发者模式加载后，上传 FTL + JSON 即可看样式 |
 
 模版本体交付到 `print-util` 的 `src/main/resources/templates/`，工具仓只放工具，两者边界清晰。
 
 **交付的不只是代码，还有流程。** 只给 FTL 和 JSON 的话，拿到的人还得自己想怎么测、
 怎么提 MR，可复用的只有代码。所以把自测与提 MR 这两个环节也一并沉淀成了工具。
+同一条「飞书需求 → 编码 → 自测出报告 → 提 MR」也抽成了通用 skill `req-to-mr`，
+非小票需求同样能用，验证手段按目标仓库已有能力探测（lint / 单测 / 构建），不假设某种框架。
 
 ---
 
@@ -40,7 +44,9 @@
 git clone http://gitlab.zbspos.com/Shawn/ftl-util.git
 ```
 
-用 Cursor 打开，`.cursor/skills/` 里三个 skill 自动生效，不需要任何配置。然后一句话：
+用 Cursor 打开，`.cursor/skills/` 里四个 skill 自动生效，不需要任何配置。
+
+**小票模版**走 `ftl-ticket-workflow`，给三样东西：
 
 ```
 按流程做这个需求：<飞书文档链接>
@@ -49,14 +55,25 @@ git clone http://gitlab.zbspos.com/Shawn/ftl-util.git
 目标仓库：<你本地的 print-util 路径>
 ```
 
-它会依次做完：读需求列改动清单 → 跟你对齐口径 → 改代码 → 跑自测 → 出 HTML 预览 →
-按目标仓库的命名习惯建分支 → 提 MR 并把自测报告作为附件带上。
+**其他需求**走 `req-to-mr`，同一条链路，不绑定技术栈：
+
+```
+按流程做这个需求：<飞书文档链接>
+目标仓库：<你本地的仓库路径>
+```
+
+都会依次做完：读需求列改动清单 → 对齐口径 → 编码 → 自测出报告 → 建分支 → 提 MR。
+小票路径还会出 HTML 预览；通用路径的验证按目标仓库已有手段探测，仓库没有单测会如实写进 MR，不假装测过。
 
 **中途它会停下来问你，那不是卡住，是在等你确认口径。** 需求文档最常漏写的就是
 「这个字段没数据时该显示什么」——整块隐藏、显示占位、还是显示 0，必须人来拍板。
 
 新增模版和修改现有模版都覆盖。修改现有模版时会强制做改动前后回归对比，
 只报「这次改出来的问题」，老模版本来就带着的告警不会拦你。
+
+只想看样式、不走整条流程时，用 Chrome 扩展 [FTL 小票预览](http://gitlab.zbspos.com/common-util/browser-extend)：
+开发者模式加载后，上传 FTL + Demo JSON，右侧实时渲染，可切「样式预览 / 尽力求值」，可下载 `preview.html`。
+自测、回归、提 MR 仍走 `ftl-util`，插件不替代那条链路。
 
 ---
 
@@ -95,7 +112,7 @@ git clone http://gitlab.zbspos.com/Shawn/ftl-util.git
 | 餐品 | `mealInfo` + `child` + `remarkChild` | 数量/名称/价格；备注与 Mod 有则显 |
 | 整单备注 | `orderNoteInfo` | 有则显 |
 | 金额 | `orderAmountInfo` | Total 放大；Tax 行可出 `i` |
-| Tax&Fee 弹层 | `taxFeeDetailInfo`（新增占位） | 无数据不显示 `i`、不渲染弹层 |
+| Tax&Fee 折叠 | `taxFeeDetailInfo`（新增占位） | 无数据不显示 `i`、不渲染折叠区；有则点汇总行原生展开 |
 | 支付 | `tradeInfo` | 无数据整块不渲染；支持多支付 |
 | 交易侧保留不渲染 | `transInfo` / `cardDetail` / `amountInfo` | 拼盘留给后端；本 H5 不做刷卡联细节 |
 
@@ -108,16 +125,16 @@ git clone http://gitlab.zbspos.com/Shawn/ftl-util.git
 
 - `order-ticket-template.ftl` / `trade-ticket-template.ftl`：**热敏打印继续用，本次不动**
 - 本案例是**短信短链 H5 新模版**，只新增不改动
-- 仅 `taxFeeDetailInfo` 为弹层新增占位，需后端灌数，结构与其他 `*Info` 一致
+- 仅 `taxFeeDetailInfo` 为折叠明细新增占位，需后端灌数，结构与其他 `*Info` 一致
 
 ---
 
 ## 7. KR1 完成定义（DoD）
 
 - [x] 有可运行的 FTL + Demo JSON
-- [x] 有字段对照与边界规则（胶囊 / 支付隐藏 / 弹层）
+- [x] 有字段对照与边界规则（胶囊 / 支付隐藏 / Tax&Fee 折叠）
 - [x] 交付物已进入正式评审流程（[print-util !88](http://gitlab.zbspos.com/posbee-microservice/print-util/-/merge_requests/88)）
 - [x] 复用方式从「照抄文件」升级为「clone 即用」（[Shawn/ftl-util](http://gitlab.zbspos.com/Shawn/ftl-util)）
-- [ ] 组内至少 1 人按「复用步骤」独立跑通一次（需组织）
-- [ ] 样板间目录收录本案例（需挂载）
-- [ ] 工具仓转移到 `common-util` 群组，避免挂在个人名下不便交接（需 Maintainer 操作）
+- [ ] 组内至少 1 人按复用步骤独立跑通
+- [ ] 样板间目录收录本案例
+- [ ] 工具仓迁至 `common-util` 群组，便于交接

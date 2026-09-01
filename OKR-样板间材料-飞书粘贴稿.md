@@ -24,15 +24,16 @@
 - 小票模版 MR：[print-util !88](http://gitlab.zbspos.com/posbee-microservice/print-util/-/merge_requests/88)
 - 工具链与 skill 仓库：[Shawn/ftl-util](http://gitlab.zbspos.com/Shawn/ftl-util)
 - 完整案例（FTL + JSON + MR 描述范例）：`ftl-util` 的 `examples/order-trade-ticket/`
+- Chrome 扩展 · FTL 小票预览：[common-util/browser-extend](http://gitlab.zbspos.com/common-util/browser-extend)
 
 业务需求：[订单短信/邮件小票样式优化](https://zath6evqnvz.feishu.cn/wiki/KOokwhaejicNWpkVyG9c5618n8b)
 
 **同事怎么复用：**
 
 1. `git clone http://gitlab.zbspos.com/Shawn/ftl-util.git`
-2. 用 Cursor 打开，`.cursor/skills/` 里三个 skill 自动生效，无需任何配置
-3. 一句话给三样东西：需求文档链接、你的 FTL、你的 JSON
-4. 它会走完：读需求列改动清单 → 对齐口径 → 编码 → 自测出报告 → 出预览 → 建分支 → 提 MR
+2. 用 Cursor 打开，`.cursor/skills/` 里四个 skill 自动生效，无需任何配置
+3. 小票模版给三样：需求文档链接、FTL、JSON；其他需求给两样：需求文档链接、目标仓库（`req-to-mr`）
+4. 都会走完：飞书需求 → 编码 → 自测出报告 → 提 MR
 
 中途它会停下来问口径，那不是卡住，是在等你拍板——需求文档最常漏写的就是
 「某个字段没数据时该显示什么」。
@@ -55,6 +56,7 @@
 | KR3 | https://zath6evqnvz.feishu.cn/wiki/HRmAwIkjEiHzXfk31THcnzU0n0c |
 | 模版 MR | http://gitlab.zbspos.com/posbee-microservice/print-util/-/merge_requests/88 |
 | 工具仓 | http://gitlab.zbspos.com/Shawn/ftl-util |
+| Chrome 扩展 | http://gitlab.zbspos.com/common-util/browser-extend |
 | 业务需求 | https://zath6evqnvz.feishu.cn/wiki/KOokwhaejicNWpkVyG9c5618n8b |
 
 代码与数据不再传飞书附件，统一放 GitLab，避免两处版本不一致。
